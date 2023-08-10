@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 export default {
   name: 'HomeView',
 };
@@ -18,12 +18,26 @@ export default {
         <div class="lg:col-span-3">
           <ul class="flex">
             <li>
-              <a href="javascript:;" class="block border-b-2 border-primary px-4 py-2 text-primary">Your Feed</a>
+              <router-link :to="{ name: 'my-feed' }" class="block border-b-2 border-primary px-4 py-2 text-primary">
+                Your Feed
+              </router-link>
             </li>
             <li>
-              <a href="javascript:;" class="block border-b-2 border-transparent px-4 py-2 text-[#aaaaaa]"
-                >Global Feed</a
+              <router-link
+                :to="{ name: 'global-feed' }"
+                class="block border-b-2 border-transparent px-4 py-2 text-[#aaaaaa] duration-300 hover:border-primary hover:text-primary"
               >
+                Global Feed
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                :to="{ name: 'tag' }"
+                class="block border-b-2 border-transparent px-4 py-2 text-[#aaaaaa] duration-300 hover:border-primary hover:text-primary"
+              >
+                <i class="ion-pound"></i>
+                tag name
+              </router-link>
             </li>
           </ul>
           <ul>
@@ -44,7 +58,7 @@ export default {
                     <i class="ion-heart"></i> 1584
                   </button>
                 </div>
-                <a href="javascript:;" class="mt-4 block">
+                <router-link :to="{ name: 'article' }" class="mt-4 block">
                   <h2 class="text-2xl font-semibold leading-[1.1]">
                     Try to transmit the HTTP card, maybe it will override the multi-byte hard drive!
                   </h2>
@@ -63,7 +77,7 @@ export default {
                       </li>
                     </ul>
                   </div>
-                </a>
+                </router-link>
               </div>
             </li>
             <li>

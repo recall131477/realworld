@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: 'LoginView',
+  name: 'RegisterView',
 };
 </script>
 
@@ -10,13 +10,23 @@ export default {
       <div class="md:mx-auto md:w-1/2">
         <div class="mb-4 text-center">
           <h1 class="text-[40px]">Sign up</h1>
-          <router-link :to="{ name: 'register' }" class="text-primary">Need an account?</router-link>
+          <router-link :to="{ name: 'login' }" class="text-primary">Have an account?</router-link>
         </div>
         <ul class="mb-4 list-disc pl-10 font-bold text-danger">
           <li>error message</li>
         </ul>
         <form>
           <fieldset class="space-y-4">
+            <fieldset>
+              <input
+                type="text"
+                id="userName"
+                name="userName"
+                autocomplete="userName"
+                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999] disabled:pointer-events-none disabled:bg-[#eceeef]"
+                placeholder="Your Name"
+              />
+            </fieldset>
             <fieldset>
               <input
                 type="email"
