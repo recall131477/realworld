@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import ArticleMetaComponent from '../../components/ArticleMetaComponent.vue';
+import ArticleMetaComponent from '@/components/ArticleMetaComponent.vue';
 </script>
 
 <template>

@@ -4,6 +4,8 @@ export default {
 };
 </script>
 
+<script setup lang="ts"></script>
+
 <template>
   <div class="bg-primary py-8 text-center text-white">
     <div class="mx-auto max-w-[1140px] px-[15px]">

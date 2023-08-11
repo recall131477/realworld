@@ -4,6 +4,29 @@ export default {
 };
 </script>
 
+<script setup lang="ts">
+import { ref } from 'vue';
+
+import type { User } from '@/types';
+
+import { register } from '@/api';
+
+const user = ref<User>({
+  username: '',
+  email: '',
+  password: '',
+});
+
+const onSubmit = async () => {
+  try {
+    const res = await register({ user: user.value });
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+</script>
+
 <template>
   <div class="pt-6">
     <div class="mx-auto max-w-[1140px] px-[15px]">
@@ -15,7 +38,7 @@ export default {
         <ul class="mb-4 list-disc pl-10 font-bold text-danger">
           <li>error message</li>
         </ul>
-        <form>
+        <form @submit.prevent="onSubmit">
           <fieldset class="space-y-4">
             <fieldset>
               <input
@@ -25,6 +48,7 @@ export default {
                 autocomplete="userName"
                 class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999] disabled:pointer-events-none disabled:bg-[#eceeef]"
                 placeholder="Your Name"
+                v-model="user.username"
               />
             </fieldset>
             <fieldset>
@@ -35,6 +59,7 @@ export default {
                 autocomplete="email"
                 class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999] disabled:pointer-events-none disabled:bg-[#eceeef]"
                 placeholder="Email"
+                v-model="user.email"
               />
             </fieldset>
             <fieldset>
@@ -45,11 +70,12 @@ export default {
                 autocomplete="current-password"
                 class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999] disabled:pointer-events-none disabled:bg-[#eceeef]"
                 placeholder="Password"
+                v-model="user.password"
               />
             </fieldset>
             <div class="text-right">
               <button
-                type="button"
+                type="submit"
                 class="inline-block rounded bg-primary px-6 py-3 text-xl leading-tight text-white duration-300 hover:bg-primary-dark"
               >
                 Sign up

@@ -2,8 +2,8 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
-import './assets/scss/tailwind.scss';
-import './assets/scss/app.scss';
+import '@/assets/scss/tailwind.scss';
+import '@/assets/scss/app.scss';
 
 const app = createApp(App);
 
