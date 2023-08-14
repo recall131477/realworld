@@ -4,14 +4,25 @@ export default {
 };
 </script>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
+const { userInfo, isLoggedIn } = storeToRefs(userStore);
+const { removeUser } = userStore;
+
+const logout = () => {
+  removeUser();
+};
+</script>
 
 <template>
   <nav class="fixed left-0 top-0 z-[999] w-full bg-white">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="flex h-14 items-center justify-between">
         <router-link
-          :to="{ name: 'home' }"
+          :to="{ name: 'global-feed' }"
           class="font-titillium text-2xl text-primary"
           >conduit</router-link
         >
@@ -19,48 +30,66 @@ export default {
           class="fixed left-0 top-14 w-full bg-white md:static md:flex md:w-auto md:gap-x-4"
         >
           <li class="border-t border-black/10 md:border-0">
-            <a
-              href="javascript:;"
-              class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
-              >Home</a
-            >
-          </li>
-          <li class="border-t border-black/10 md:border-0">
             <router-link
-              :to="{ name: 'create-article' }"
+              :to="{ name: 'global-feed' }"
               class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
-              >New Article</router-link
-            >
-          </li>
-          <li class="border-t border-black/10 md:border-0">
-            <router-link
-              :to="{ name: 'login' }"
-              class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
-              >Sign in</router-link
-            >
-          </li>
-          <li class="border-t border-black/10 md:border-0">
-            <router-link
-              :to="{ name: 'register' }"
-              class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
-              >Sign Up</router-link
-            >
-          </li>
-          <li class="border-t border-black/10 md:border-0">
-            <router-link
-              :to="{ name: 'settings' }"
-              class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
-            >
-              <i class="ion-gear-a"></i>&nbsp;Settings
+              >Home
             </router-link>
           </li>
-          <li class="border-t border-black/10 md:border-0">
-            <router-link
-              :to="{ name: 'profile' }"
-              class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
-              >Profile
-            </router-link>
-          </li>
+          <template v-if="!isLoggedIn">
+            <li class="border-t border-black/10 md:border-0">
+              <router-link
+                :to="{ name: 'login' }"
+                class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
+                >Sign in</router-link
+              >
+            </li>
+            <li class="border-t border-black/10 md:border-0">
+              <router-link
+                :to="{ name: 'register' }"
+                class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
+                >Sign Up</router-link
+              >
+            </li>
+          </template>
+          <template v-else>
+            <li class="border-t border-black/10 md:border-0">
+              <router-link
+                :to="{ name: 'create-article' }"
+                class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
+                >New Article</router-link
+              >
+            </li>
+            <li class="border-t border-black/10 md:border-0">
+              <router-link
+                :to="{ name: 'settings' }"
+                class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
+              >
+                <i class="ion-gear-a"></i>&nbsp;Settings
+              </router-link>
+            </li>
+            <li class="border-t border-black/10 md:border-0">
+              <router-link
+                :to="{ name: 'profile' }"
+                class="flex items-center px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
+              >
+                <img
+                  :src="userInfo?.image"
+                  :alt="userInfo?.username"
+                  class="h-6 w-6 rounded-full object-cover"
+                />
+                {{ userInfo?.username }}
+              </router-link>
+            </li>
+            <li class="border-t border-black/10 md:border-0">
+              <router-link
+                :to="{ name: 'global-feed' }"
+                class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
+                @click="logout"
+                >Sign out
+              </router-link>
+            </li>
+          </template>
         </ul>
         <button type="button" class="relative h-10 w-10 md:hidden">
           <span

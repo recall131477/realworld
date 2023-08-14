@@ -3,14 +3,20 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
+import { useUserStore } from '@/stores/user';
 
 import '@/assets/scss/tailwind.scss';
 import '@/assets/scss/app.scss';
 
 const app = createApp(App);
-const pinia = createPinia();
 
-app.use(router);
-app.use(pinia);
+(async () => {
+  app.use(createPinia());
 
-app.mount('#app');
+  const userStore = useUserStore();
+  const { verifyAuth } = userStore;
+  await verifyAuth();
+
+  app.use(router);
+  app.mount('#app');
+})();
