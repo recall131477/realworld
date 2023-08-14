@@ -6,11 +6,18 @@ export default {
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 import type { User } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
+import { useUserStore } from '@/stores/user';
+
 import { register } from '@/api';
+
+const router = useRouter();
+
+const { setUser } = useUserStore();
 
 const user = ref<User>({
   username: '',
@@ -20,10 +27,11 @@ const user = ref<User>({
 
 const errors = ref<ErrorObject>({});
 
-const onSubmit = async () => {
+const handleRegister = async () => {
   try {
     const res = await register({ user: user.value });
-    console.log(res);
+    setUser(res.user);
+    router.push({ name: 'home' });
   } catch (error) {
     errors.value = (error as any).errors;
   }
@@ -45,7 +53,7 @@ const onSubmit = async () => {
             {{ field }} {{ error ? error[0] : '' }}
           </li>
         </ul>
-        <form @submit.prevent="onSubmit">
+        <form @submit.prevent="handleRegister">
           <fieldset class="space-y-4">
             <fieldset>
               <input
