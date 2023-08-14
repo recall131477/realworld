@@ -4,11 +4,6 @@ const routes = [
   /** 不需要身分驗證 */
   {
     path: '/',
-    name: 'home',
-    component: () => import('../views/homeView/index.vue'),
-  },
-  {
-    path: '/',
     name: 'global-feed',
     component: () => import('../views/homeView/index.vue'),
   },
