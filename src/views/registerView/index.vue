@@ -8,6 +8,7 @@ export default {
 import { ref } from 'vue';
 
 import type { User } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 import { register } from '@/api';
 
@@ -17,12 +18,14 @@ const user = ref<User>({
   password: '',
 });
 
+const errors = ref<ErrorObject>({});
+
 const onSubmit = async () => {
   try {
     const res = await register({ user: user.value });
     console.log(res);
   } catch (error) {
-    console.log(error);
+    errors.value = (error as any).errors;
   }
 };
 </script>
@@ -33,10 +36,14 @@ const onSubmit = async () => {
       <div class="md:mx-auto md:w-1/2">
         <div class="mb-4 text-center">
           <h1 class="text-[40px]">Sign up</h1>
-          <router-link :to="{ name: 'login' }" class="text-primary">Have an account?</router-link>
+          <router-link :to="{ name: 'login' }" class="text-primary"
+            >Have an account?</router-link
+          >
         </div>
-        <ul class="mb-4 list-disc pl-10 font-bold text-danger">
-          <li>error message</li>
+        <ul class="mb-4 list-disc pl-10 font-bold text-danger" v-if="errors">
+          <li v-for="(error, field) in errors" :key="field">
+            {{ field }} {{ error ? error[0] : '' }}
+          </li>
         </ul>
         <form @submit.prevent="onSubmit">
           <fieldset class="space-y-4">
