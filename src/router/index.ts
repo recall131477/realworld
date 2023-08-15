@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { useUserStore } from '@/stores/user';
 
 const routes = [
   /** 不需要身分驗證 */
@@ -81,7 +82,7 @@ const routes = [
     },
   },
   {
-    path: '/profile',
+    path: '/profile/:username',
     name: 'profile',
     component: () => import('../views/profileView/index.vue'),
     meta: {
@@ -110,6 +111,21 @@ const router = createRouter({
       behavior: 'smooth',
     };
   },
+});
+
+router.beforeEach((to) => {
+  const userStore = useUserStore();
+  const { isLoggedIn } = userStore;
+  if (to.meta.requiresAuth && !isLoggedIn) {
+    return {
+      name: 'login',
+    };
+  }
+  if (to.meta.anonymousOnly && isLoggedIn) {
+    return {
+      name: 'global-feed',
+    };
+  }
 });
 
 export default router;
