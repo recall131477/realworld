@@ -4,8 +4,11 @@ export interface User {
   password: string;
 }
 
-export interface UserInfo extends Omit<User, 'password'> {
-  token: string;
+export interface UserInfo {
+  email: string;
+  password?: string;
+  token?: string;
+  username: string;
   bio: string;
   image: string;
 }
