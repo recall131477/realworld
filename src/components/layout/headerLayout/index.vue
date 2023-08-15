@@ -70,7 +70,12 @@ const logout = () => {
             </li>
             <li class="border-t border-black/10 md:border-0">
               <router-link
-                :to="{ name: 'profile' }"
+                :to="{
+                  name: 'profile',
+                  params: {
+                    username: userInfo?.username,
+                  },
+                }"
                 class="flex items-center px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
               >
                 <img
