@@ -67,7 +67,7 @@ const handleUpdateUser = async () => {
             {{ field }} {{ error ? error[0] : '' }}
           </li>
         </ul>
-        <form>
+        <form @submit.prevent="handleUpdateUser">
           <fieldset class="space-y-4">
             <fieldset class="form-group">
               <input
@@ -122,9 +122,8 @@ const handleUpdateUser = async () => {
             </fieldset>
             <div class="text-right">
               <button
-                type="button"
+                type="submit"
                 class="inline-block rounded bg-primary px-6 py-3 text-xl leading-tight text-white duration-300 hover:bg-primary-dark"
-                @click="handleUpdateUser"
               >
                 Update Settings
               </button>
