@@ -5,15 +5,26 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import type { Articles } from '@/types';
 import { useUserStore } from '@/stores/user';
+import { getArticles } from '@/api';
 import TagsComponent from '@/components/TagsComponent.vue';
 
 const route = useRoute();
 
 const userStore = useUserStore();
 const { isLoggedIn } = storeToRefs(userStore);
+
+const articles = ref<Articles[]>([]);
+
+onMounted(async () => {
+  const res = await getArticles('global-feed');
+  articles.value = res.articles;
+  console.log(articles.value);
+});
 </script>
 
 <template>
