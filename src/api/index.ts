@@ -2,6 +2,7 @@ import request from '@/utils/request';
 
 import type { User, UserInfo } from '@/types';
 
+/** user */
 export const login = (params: { user: User }): Promise<{ user: UserInfo }> => {
   return request({
     method: 'POST',
@@ -10,7 +11,9 @@ export const login = (params: { user: User }): Promise<{ user: UserInfo }> => {
   });
 };
 
-export const register = (params: { user: User }): Promise<{ user: UserInfo }> => {
+export const register = (params: {
+  user: User;
+}): Promise<{ user: UserInfo }> => {
   return request({
     method: 'POST',
     url: '/users',
@@ -25,10 +28,20 @@ export const getUser = (): Promise<{ user: UserInfo }> => {
   });
 };
 
-export const updateUser = (params: { user: UserInfo }): Promise<{ user: UserInfo }> => {
+export const updateUser = (params: {
+  user: UserInfo;
+}): Promise<{ user: UserInfo }> => {
   return request({
     method: 'PUT',
     url: '/user',
     data: params,
+  });
+};
+
+/** tag */
+export const getTags = (): Promise<{ tags: string[] }> => {
+  return request({
+    method: 'GET',
+    url: '/tags',
   });
 };

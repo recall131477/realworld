@@ -4,7 +4,17 @@ export default {
 };
 </script>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRoute } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user';
+import TagsComponent from '@/components/TagsComponent.vue';
+
+const route = useRoute();
+
+const userStore = useUserStore();
+const { isLoggedIn } = storeToRefs(userStore);
+</script>
 
 <template>
   <div class="bg-primary py-8 text-center text-white">
@@ -13,32 +23,52 @@ export default {
       <p class="mt-2 text-2xl font-light">A place to share your knowledge.</p>
     </div>
   </div>
-
   <div class="pt-8">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="grid grid-cols-1 gap-[30px] lg:grid-cols-4">
         <div class="lg:col-span-3">
           <ul class="flex">
-            <li>
-              <router-link :to="{ name: 'my-feed' }" class="block border-b-2 border-primary px-4 py-2 text-primary">
+            <li v-if="isLoggedIn">
+              <router-link
+                :to="{ name: 'my-feed' }"
+                class="block border-b-2 px-4 py-2 duration-300 hover:border-primary hover:text-primary"
+                :class="
+                  route.name === 'my-feed'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-[#aaaaaa]'
+                "
+              >
                 Your Feed
               </router-link>
             </li>
             <li>
               <router-link
                 :to="{ name: 'global-feed' }"
-                class="block border-b-2 border-transparent px-4 py-2 text-[#aaaaaa] duration-300 hover:border-primary hover:text-primary"
+                class="block border-b-2 px-4 py-2 duration-300 hover:border-primary hover:text-primary"
+                :class="
+                  route.name === 'global-feed'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-[#aaaaaa]'
+                "
               >
                 Global Feed
               </router-link>
             </li>
-            <li>
+            <li v-if="route.params.tag">
               <router-link
-                :to="{ name: 'tag' }"
-                class="block border-b-2 border-transparent px-4 py-2 text-[#aaaaaa] duration-300 hover:border-primary hover:text-primary"
+                :to="{
+                  name: 'tag',
+                  params: { tag: route.params.tag },
+                }"
+                class="block border-b-2 px-4 py-2 duration-300 hover:border-primary hover:text-primary"
+                :class="
+                  route.name === 'tag'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-[#aaaaaa]'
+                "
               >
                 <i class="ion-pound"></i>
-                tag name
+                {{ route.params.tag }}
               </router-link>
             </li>
           </ul>
@@ -47,10 +77,19 @@ export default {
               <div class="border-t border-black/10 py-6">
                 <div class="flex items-center justify-between gap-x-4">
                   <div class="flex items-center gap-x-2">
-                    <a href="javascript:;" class="h-8 w-8 rounded-full bg-pink-500"></a>
+                    <a
+                      href="javascript:;"
+                      class="h-8 w-8 rounded-full bg-pink-500"
+                    ></a>
                     <div>
-                      <a href="javascript:;" class="block font-medium text-primary">Anah</a>
-                      <span class="block text-xs text-[#bbbbbb]">2022/12/9</span>
+                      <a
+                        href="javascript:;"
+                        class="block font-medium text-primary"
+                        >Anah</a
+                      >
+                      <span class="block text-xs text-[#bbbbbb]"
+                        >2022/12/9</span
+                      >
                     </div>
                   </div>
                   <button
@@ -62,19 +101,27 @@ export default {
                 </div>
                 <router-link :to="{ name: 'article' }" class="mt-4 block">
                   <h2 class="text-2xl font-semibold leading-[1.1]">
-                    Try to transmit the HTTP card, maybe it will override the multi-byte hard drive!
+                    Try to transmit the HTTP card, maybe it will override the
+                    multi-byte hard drive!
                   </h2>
                   <p class="mt-1 font-light text-[#999999]">
-                    Assumenda molestiae laboriosam enim ipsum quaerat enim officia vel quo. Earum odit rem natus totam
-                    atque cumque. Sint dolorem facere non.
+                    Assumenda molestiae laboriosam enim ipsum quaerat enim
+                    officia vel quo. Earum odit rem natus totam atque cumque.
+                    Sint dolorem facere non.
                   </p>
                   <div class="mt-4 flex justify-between gap-x-4">
-                    <span class="text-sm font-light text-[#bbbbbb]">Read more...</span>
+                    <span class="text-sm font-light text-[#bbbbbb]"
+                      >Read more...</span
+                    >
                     <ul class="flex flex-wrap gap-1">
-                      <li class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+                      <li
+                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+                      >
                         <span>voluptate</span>
                       </li>
-                      <li class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+                      <li
+                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+                      >
                         <span>rerum</span>
                       </li>
                     </ul>
@@ -86,10 +133,19 @@ export default {
               <div class="border-t border-black/10 py-6">
                 <div class="flex items-center justify-between gap-x-4">
                   <div class="flex items-center gap-x-2">
-                    <a href="javascript:;" class="h-8 w-8 rounded-full bg-pink-500"></a>
+                    <a
+                      href="javascript:;"
+                      class="h-8 w-8 rounded-full bg-pink-500"
+                    ></a>
                     <div>
-                      <a href="javascript:;" class="block font-medium text-primary">Anah</a>
-                      <span class="block text-xs text-[#bbbbbb]">2022/12/9</span>
+                      <a
+                        href="javascript:;"
+                        class="block font-medium text-primary"
+                        >Anah</a
+                      >
+                      <span class="block text-xs text-[#bbbbbb]"
+                        >2022/12/9</span
+                      >
                     </div>
                   </div>
                   <button
@@ -101,19 +157,27 @@ export default {
                 </div>
                 <a href="javascript:;" class="mt-4 block">
                   <h2 class="text-2xl font-semibold leading-[1.1]">
-                    Try to transmit the HTTP card, maybe it will override the multi-byte hard drive!
+                    Try to transmit the HTTP card, maybe it will override the
+                    multi-byte hard drive!
                   </h2>
                   <p class="mt-1 font-light text-[#999999]">
-                    Assumenda molestiae laboriosam enim ipsum quaerat enim officia vel quo. Earum odit rem natus totam
-                    atque cumque. Sint dolorem facere non.
+                    Assumenda molestiae laboriosam enim ipsum quaerat enim
+                    officia vel quo. Earum odit rem natus totam atque cumque.
+                    Sint dolorem facere non.
                   </p>
                   <div class="mt-4 flex justify-between gap-x-4">
-                    <span class="text-sm font-light text-[#bbbbbb]">Read more...</span>
+                    <span class="text-sm font-light text-[#bbbbbb]"
+                      >Read more...</span
+                    >
                     <ul class="flex flex-wrap gap-1">
-                      <li class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+                      <li
+                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+                      >
                         <span>voluptate</span>
                       </li>
-                      <li class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+                      <li
+                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+                      >
                         <span>rerum</span>
                       </li>
                     </ul>
@@ -125,10 +189,19 @@ export default {
               <div class="border-t border-black/10 py-6">
                 <div class="flex items-center justify-between gap-x-4">
                   <div class="flex items-center gap-x-2">
-                    <a href="javascript:;" class="h-8 w-8 rounded-full bg-pink-500"></a>
+                    <a
+                      href="javascript:;"
+                      class="h-8 w-8 rounded-full bg-pink-500"
+                    ></a>
                     <div>
-                      <a href="javascript:;" class="block font-medium text-primary">Anah</a>
-                      <span class="block text-xs text-[#bbbbbb]">2022/12/9</span>
+                      <a
+                        href="javascript:;"
+                        class="block font-medium text-primary"
+                        >Anah</a
+                      >
+                      <span class="block text-xs text-[#bbbbbb]"
+                        >2022/12/9</span
+                      >
                     </div>
                   </div>
                   <button
@@ -140,19 +213,27 @@ export default {
                 </div>
                 <a href="javascript:;" class="mt-4 block">
                   <h2 class="text-2xl font-semibold leading-[1.1]">
-                    Try to transmit the HTTP card, maybe it will override the multi-byte hard drive!
+                    Try to transmit the HTTP card, maybe it will override the
+                    multi-byte hard drive!
                   </h2>
                   <p class="mt-1 font-light text-[#999999]">
-                    Assumenda molestiae laboriosam enim ipsum quaerat enim officia vel quo. Earum odit rem natus totam
-                    atque cumque. Sint dolorem facere non.
+                    Assumenda molestiae laboriosam enim ipsum quaerat enim
+                    officia vel quo. Earum odit rem natus totam atque cumque.
+                    Sint dolorem facere non.
                   </p>
                   <div class="mt-4 flex justify-between gap-x-4">
-                    <span class="text-sm font-light text-[#bbbbbb]">Read more...</span>
+                    <span class="text-sm font-light text-[#bbbbbb]"
+                      >Read more...</span
+                    >
                     <ul class="flex flex-wrap gap-1">
-                      <li class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+                      <li
+                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+                      >
                         <span>voluptate</span>
                       </li>
-                      <li class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+                      <li
+                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+                      >
                         <span>rerum</span>
                       </li>
                     </ul>
@@ -188,18 +269,7 @@ export default {
         <div>
           <div class="rounded bg-[#f3f3f3] p-2.5">
             <span>Popular Tags</span>
-            <div class="mt-1 flex flex-wrap gap-1">
-              <a
-                href="javascript:;"
-                class="rounded-full bg-[#818a91] px-2 py-0.5 text-sm text-white duration-300 hover:bg-[#687077]"
-                >welcome</a
-              >
-              <a
-                href="javascript:;"
-                class="rounded-full bg-[#818a91] px-2 py-0.5 text-sm text-white duration-300 hover:bg-[#687077]"
-                >implementations</a
-              >
-            </div>
+            <TagsComponent />
           </div>
         </div>
       </div>

@@ -9,12 +9,11 @@ const routes = [
     component: () => import('../views/homeView/index.vue'),
   },
   {
-    path: '/tag',
+    path: '/tag/:tag',
     name: 'tag',
     component: () => import('../views/homeView/index.vue'),
     meta: {
       title: 'tag',
-      anonymousOnly: true,
     },
   },
   {
