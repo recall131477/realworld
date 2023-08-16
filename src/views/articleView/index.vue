@@ -12,7 +12,8 @@ import ArticleMetaComponent from '@/components/ArticleMetaComponent.vue';
   <div class="bg-[#333333] py-8 text-white">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <h1 class="mb-8 text-[44px] font-semibold leading-none">
-        Try to transmit the HTTP card, maybe it will override the multi-byte hard drive!
+        Try to transmit the HTTP card, maybe it will override the multi-byte
+        hard drive!
       </h1>
       <ArticleMetaComponent />
     </div>
@@ -20,19 +21,27 @@ import ArticleMetaComponent from '@/components/ArticleMetaComponent.vue';
   <div class="pt-8">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="font-serif text-lg">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil asperiores iusto distinctio aspernatur fugiat
-        dolorem quae odit repellendus similique cupiditate animi quidem, maxime explicabo optio temporibus eveniet
-        mollitia eum! Quos nulla veritatis expedita culpa nostrum, incidunt repellat ullam accusamus ea laboriosam
-        inventore nisi assumenda, explicabo aut, ab dolore facere voluptate!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
+        asperiores iusto distinctio aspernatur fugiat dolorem quae odit
+        repellendus similique cupiditate animi quidem, maxime explicabo optio
+        temporibus eveniet mollitia eum! Quos nulla veritatis expedita culpa
+        nostrum, incidunt repellat ullam accusamus ea laboriosam inventore nisi
+        assumenda, explicabo aut, ab dolore facere voluptate!
       </div>
       <ul class="mt-8 flex gap-1">
         <li>
-          <a href="javascript:;" class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+          <a
+            href="javascript:;"
+            class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+          >
             voluptate
           </a>
         </li>
         <li>
-          <a href="javascript:;" class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+          <a
+            href="javascript:;"
+            class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+          >
             rerum
           </a>
         </li>
@@ -49,7 +58,9 @@ import ArticleMetaComponent from '@/components/ArticleMetaComponent.vue';
             rows="3"
             placeholder="Write a comment..."
           ></textarea>
-          <div class="flex justify-between border-t border-[#e5e5e5] bg-[#f5f5f5] px-5 py-3">
+          <div
+            class="flex justify-between border-t border-[#e5e5e5] bg-[#f5f5f5] px-5 py-3"
+          >
             <a href="javascript:;" class="h-8 w-8 rounded-full bg-pink-500"></a>
             <button
               type="button"

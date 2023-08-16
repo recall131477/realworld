@@ -10,7 +10,9 @@ export default {
   <div class="bg-[#f3f3f3] py-8 pb-4">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="md:mx-auto md:w-10/12">
-        <span class="mx-auto block h-[100px] w-[100px] rounded-full bg-pink-200"></span>
+        <span
+          class="mx-auto block h-[100px] w-[100px] rounded-full bg-pink-200"
+        ></span>
         <div class="mt-4 text-center">
           <h1 class="text-2xl font-bold">recall131477</h1>
           <p class="mt-1 font-light text-[#aaaaaa]">肉鬆</p>
@@ -31,7 +33,9 @@ export default {
       <div class="md:mx-auto md:w-10/12">
         <ul class="flex">
           <li>
-            <router-link :to="{ name: 'profile' }" class="block border-b-2 border-primary px-4 py-2 text-primary"
+            <router-link
+              :to="{ name: 'profile' }"
+              class="block border-b-2 border-primary px-4 py-2 text-primary"
               >My Articles
             </router-link>
           </li>
@@ -48,9 +52,16 @@ export default {
             <div class="border-t border-black/10 py-6">
               <div class="flex items-center justify-between gap-x-4">
                 <div class="flex items-center gap-x-2">
-                  <a href="javascript:;" class="h-8 w-8 rounded-full bg-pink-500"></a>
+                  <a
+                    href="javascript:;"
+                    class="h-8 w-8 rounded-full bg-pink-500"
+                  ></a>
                   <div>
-                    <a href="javascript:;" class="block font-medium text-primary">recall131477</a>
+                    <a
+                      href="javascript:;"
+                      class="block font-medium text-primary"
+                      >recall131477</a
+                    >
                     <span class="block text-xs text-[#bbbbbb]">2023/8/10</span>
                   </div>
                 </div>
@@ -65,9 +76,13 @@ export default {
                 <h2 class="text-2xl font-semibold leading-[1.1]">test</h2>
                 <p class="mt-1 font-light text-[#999999]">test</p>
                 <div class="mt-4 flex justify-between gap-x-4">
-                  <span class="text-sm font-light text-[#bbbbbb]">Read more...</span>
+                  <span class="text-sm font-light text-[#bbbbbb]"
+                    >Read more...</span
+                  >
                   <ul class="flex flex-wrap gap-1">
-                    <li class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]">
+                    <li
+                      class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+                    >
                       <span>test</span>
                     </li>
                   </ul>
