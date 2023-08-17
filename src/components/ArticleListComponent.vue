@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute, RouteLocationNormalized } from 'vue-router';
 import type { Article, ArticleType, ArticleConfig } from '@/types';
 import type { ErrorObject } from '@/types/error';
@@ -20,10 +20,6 @@ const articlesCount = ref(0);
 const currentPage = ref(1);
 
 const errors = ref<ErrorObject>({});
-
-onMounted(() => {
-  fetchArticles();
-});
 
 const fetchArticles = async () => {
   const config: ArticleConfig = {
@@ -68,6 +64,18 @@ const setArticleParams = (
       break;
   }
 };
+
+onMounted(() => {
+  fetchArticles();
+});
+
+watch(
+  route,
+  () => {
+    fetchArticles();
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
