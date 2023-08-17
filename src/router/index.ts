@@ -54,7 +54,7 @@ const routes = [
     },
   },
   {
-    path: '/article',
+    path: '/article/:slug',
     name: 'article',
     component: () => import('../views/articleView/index.vue'),
     meta: {
