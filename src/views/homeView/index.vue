@@ -5,26 +5,17 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import type { Articles } from '@/types';
 import { useUserStore } from '@/stores/user';
-import { getArticles } from '@/api';
+
+import ArticleListComponent from '@/components/ArticleListComponent.vue';
 import TagsComponent from '@/components/TagsComponent.vue';
 
 const route = useRoute();
 
 const userStore = useUserStore();
 const { isLoggedIn } = storeToRefs(userStore);
-
-const articles = ref<Articles[]>([]);
-
-onMounted(async () => {
-  const res = await getArticles('global-feed');
-  articles.value = res.articles;
-  console.log(articles.value);
-});
 </script>
 
 <template>
@@ -83,176 +74,7 @@ onMounted(async () => {
               </router-link>
             </li>
           </ul>
-          <ul>
-            <li>
-              <div class="border-t border-black/10 py-6">
-                <div class="flex items-center justify-between gap-x-4">
-                  <div class="flex items-center gap-x-2">
-                    <a
-                      href="javascript:;"
-                      class="h-8 w-8 rounded-full bg-pink-500"
-                    ></a>
-                    <div>
-                      <a
-                        href="javascript:;"
-                        class="block font-medium text-primary"
-                        >Anah</a
-                      >
-                      <span class="block text-xs text-[#bbbbbb]"
-                        >2022/12/9</span
-                      >
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    class="inline-block rounded border border-primary px-2 py-1 text-sm leading-tight text-primary duration-300 hover:bg-primary hover:text-white disabled:pointer-events-none disabled:opacity-60"
-                  >
-                    <i class="ion-heart"></i> 1584
-                  </button>
-                </div>
-                <router-link :to="{ name: 'article' }" class="mt-4 block">
-                  <h2 class="text-2xl font-semibold leading-[1.1]">
-                    Try to transmit the HTTP card, maybe it will override the
-                    multi-byte hard drive!
-                  </h2>
-                  <p class="mt-1 font-light text-[#999999]">
-                    Assumenda molestiae laboriosam enim ipsum quaerat enim
-                    officia vel quo. Earum odit rem natus totam atque cumque.
-                    Sint dolorem facere non.
-                  </p>
-                  <div class="mt-4 flex justify-between gap-x-4">
-                    <span class="text-sm font-light text-[#bbbbbb]"
-                      >Read more...</span
-                    >
-                    <ul class="flex flex-wrap gap-1">
-                      <li
-                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
-                      >
-                        <span>voluptate</span>
-                      </li>
-                      <li
-                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
-                      >
-                        <span>rerum</span>
-                      </li>
-                    </ul>
-                  </div>
-                </router-link>
-              </div>
-            </li>
-            <li>
-              <div class="border-t border-black/10 py-6">
-                <div class="flex items-center justify-between gap-x-4">
-                  <div class="flex items-center gap-x-2">
-                    <a
-                      href="javascript:;"
-                      class="h-8 w-8 rounded-full bg-pink-500"
-                    ></a>
-                    <div>
-                      <a
-                        href="javascript:;"
-                        class="block font-medium text-primary"
-                        >Anah</a
-                      >
-                      <span class="block text-xs text-[#bbbbbb]"
-                        >2022/12/9</span
-                      >
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    class="inline-block rounded border border-primary px-2 py-1 text-sm leading-tight text-primary duration-300 hover:bg-primary hover:text-white disabled:pointer-events-none disabled:opacity-60"
-                  >
-                    <i class="ion-heart"></i> 1584
-                  </button>
-                </div>
-                <a href="javascript:;" class="mt-4 block">
-                  <h2 class="text-2xl font-semibold leading-[1.1]">
-                    Try to transmit the HTTP card, maybe it will override the
-                    multi-byte hard drive!
-                  </h2>
-                  <p class="mt-1 font-light text-[#999999]">
-                    Assumenda molestiae laboriosam enim ipsum quaerat enim
-                    officia vel quo. Earum odit rem natus totam atque cumque.
-                    Sint dolorem facere non.
-                  </p>
-                  <div class="mt-4 flex justify-between gap-x-4">
-                    <span class="text-sm font-light text-[#bbbbbb]"
-                      >Read more...</span
-                    >
-                    <ul class="flex flex-wrap gap-1">
-                      <li
-                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
-                      >
-                        <span>voluptate</span>
-                      </li>
-                      <li
-                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
-                      >
-                        <span>rerum</span>
-                      </li>
-                    </ul>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li>
-              <div class="border-t border-black/10 py-6">
-                <div class="flex items-center justify-between gap-x-4">
-                  <div class="flex items-center gap-x-2">
-                    <a
-                      href="javascript:;"
-                      class="h-8 w-8 rounded-full bg-pink-500"
-                    ></a>
-                    <div>
-                      <a
-                        href="javascript:;"
-                        class="block font-medium text-primary"
-                        >Anah</a
-                      >
-                      <span class="block text-xs text-[#bbbbbb]"
-                        >2022/12/9</span
-                      >
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    class="inline-block rounded border border-primary px-2 py-1 text-sm leading-tight text-primary duration-300 hover:bg-primary hover:text-white disabled:pointer-events-none disabled:opacity-60"
-                  >
-                    <i class="ion-heart"></i> 1584
-                  </button>
-                </div>
-                <a href="javascript:;" class="mt-4 block">
-                  <h2 class="text-2xl font-semibold leading-[1.1]">
-                    Try to transmit the HTTP card, maybe it will override the
-                    multi-byte hard drive!
-                  </h2>
-                  <p class="mt-1 font-light text-[#999999]">
-                    Assumenda molestiae laboriosam enim ipsum quaerat enim
-                    officia vel quo. Earum odit rem natus totam atque cumque.
-                    Sint dolorem facere non.
-                  </p>
-                  <div class="mt-4 flex justify-between gap-x-4">
-                    <span class="text-sm font-light text-[#bbbbbb]"
-                      >Read more...</span
-                    >
-                    <ul class="flex flex-wrap gap-1">
-                      <li
-                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
-                      >
-                        <span>voluptate</span>
-                      </li>
-                      <li
-                        class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
-                      >
-                        <span>rerum</span>
-                      </li>
-                    </ul>
-                  </div>
-                </a>
-              </div>
-            </li>
-          </ul>
+          <ArticleListComponent />
           <ul class="mt-4 flex">
             <li>
               <a
