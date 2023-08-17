@@ -1,12 +1,6 @@
 import request from '@/utils/request';
 
-import type {
-  User,
-  UserInfo,
-  Articles,
-  ArticleType,
-  ArticleSearchParams,
-} from '@/types';
+import type { User, UserInfo, Article, ArticleConfig } from '@/types';
 
 /** user */
 export const login = (params: { user: User }): Promise<{ user: UserInfo }> => {
@@ -54,14 +48,13 @@ export const getTags = (): Promise<{ tags: string[] }> => {
 
 /** article */
 export const getArticles = (
-  type: ArticleType,
-  params?: ArticleSearchParams
-): Promise<{ articles: Articles[]; articlesCount: number }> => {
-  const url = `/articles${type === 'my-feed' ? '/feed' : ''}`;
+  config: ArticleConfig
+): Promise<{ articles: Article[]; articlesCount: number }> => {
+  const url = `/articles${config.type === 'my-feed' ? '/feed' : ''}`;
 
   return request({
     method: 'GET',
     url,
-    params,
+    params: config.params,
   });
 };

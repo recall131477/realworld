@@ -22,7 +22,7 @@ interface Author {
   following: boolean;
 }
 
-export interface Articles {
+export interface Article {
   slug: string;
   title: string;
   description: string;
@@ -35,9 +35,9 @@ export interface Articles {
   author: Author;
 }
 
-export type ArticleType = 'global-feed' | 'my-feed';
+type ArticleType = 'global-feed' | 'my-feed';
 
-export interface ArticleSearchParams {
+interface ArticleSearchParams {
   tag?: string;
   author?: string;
   favorited?: string;
@@ -45,9 +45,7 @@ export interface ArticleSearchParams {
   limit?: number;
 }
 
-export interface Article {
-  title: string;
-  description: string;
-  body: string;
-  tagList: string[];
+export interface ArticleConfig {
+  type: ArticleType;
+  params: ArticleSearchParams;
 }
