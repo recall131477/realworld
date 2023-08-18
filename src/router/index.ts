@@ -90,7 +90,7 @@ const routes = [
     },
   },
   {
-    path: '/profile/favorites',
+    path: '/profile/:username/favorites',
     name: 'profile-favorites',
     component: () => import('../views/profileView/index.vue'),
     meta: {

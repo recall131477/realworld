@@ -66,6 +66,13 @@ const setArticleParams = (
   }
 };
 
+const updateArticleFavorite = (article: Article) => {
+  const index = articles.value.findIndex((item) => item.slug === article.slug);
+
+  articles.value[index].favorited = article.favorited;
+  articles.value[index].favoritesCount = article.favoritesCount;
+};
+
 const changePage = (page: number) => {
   currentPage.value = page;
   fetchArticles();
@@ -87,7 +94,10 @@ watch(
 <template>
   <ul>
     <li v-for="article in articles" :key="article.slug">
-      <ArticlePreviewComponent :article="article" />
+      <ArticlePreviewComponent
+        :article="article"
+        @update-article-favorite="updateArticleFavorite"
+      />
     </li>
   </ul>
   <PaginationComponent

@@ -58,3 +58,22 @@ export const getArticles = (
     params: config.params,
   });
 };
+
+/** favorite */
+export const favoriteArticle = (
+  slug: string
+): Promise<{ article: Article }> => {
+  return request({
+    method: 'POST',
+    url: `/articles/${slug}/favorite`,
+  });
+};
+
+export const unfavoriteArticle = (
+  slug: string
+): Promise<{ article: Article }> => {
+  return request({
+    method: 'DELETE',
+    url: `/articles/${slug}/favorite`,
+  });
+};

@@ -5,12 +5,47 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user';
 import type { Article } from '@/types';
+import type { ErrorObject } from '@/types/error';
 import { formatDate } from '@/helper';
+import { favoriteArticle, unfavoriteArticle } from '@/api';
 
-defineProps<{
+const props = defineProps<{
   article: Article;
 }>();
+
+const emit = defineEmits<{
+  (event: 'update-article-favorite', article: Article): void;
+}>();
+
+const router = useRouter();
+
+const userStore = useUserStore();
+const { isLoggedIn } = storeToRefs(userStore);
+
+const errors = ref<ErrorObject>({});
+
+const toggleFavorite = async () => {
+  if (!isLoggedIn.value) {
+    router.push({
+      name: 'login',
+    });
+  }
+
+  try {
+    const res = props.article.favorited
+      ? await unfavoriteArticle(props.article.slug)
+      : await favoriteArticle(props.article.slug);
+
+    emit('update-article-favorite', res.article);
+  } catch (error) {
+    errors.value = (error as any).errors;
+  }
+};
 </script>
 
 <template>
@@ -50,6 +85,7 @@ defineProps<{
           'bg-primary text-white': article.favorited,
           'text-primary': !article.favorited,
         }"
+        @click="toggleFavorite"
       >
         <i class="ion-heart"></i> {{ article.favoritesCount }}
       </button>
