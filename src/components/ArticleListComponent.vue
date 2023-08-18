@@ -12,6 +12,7 @@ import type { ErrorObject } from '@/types/error';
 import { pageToOffset } from '@/helper';
 import { getArticles } from '@/api';
 import ArticlePreviewComponent from '@/components/ArticlePreviewComponent.vue';
+import PaginationComponent from '@/components/PaginationComponent.vue';
 
 const route = useRoute();
 
@@ -65,6 +66,11 @@ const setArticleParams = (
   }
 };
 
+const changePage = (page: number) => {
+  currentPage.value = page;
+  fetchArticles();
+};
+
 onMounted(() => {
   fetchArticles();
 });
@@ -84,4 +90,9 @@ watch(
       <ArticlePreviewComponent :article="article" />
     </li>
   </ul>
+  <PaginationComponent
+    :articles-count="articlesCount"
+    :current-page="currentPage"
+    @change-page="changePage"
+  />
 </template>

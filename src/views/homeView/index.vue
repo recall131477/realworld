@@ -75,29 +75,6 @@ const { isLoggedIn } = storeToRefs(userStore);
             </li>
           </ul>
           <ArticleListComponent />
-          <ul class="mt-4 flex">
-            <li>
-              <a
-                href="javascript:;"
-                class="-ml-[1px] block border border-primary bg-primary px-3 py-2 text-white duration-300"
-                >1</a
-              >
-            </li>
-            <li>
-              <a
-                href="javascript:;"
-                class="-ml-[1px] block border border-[#dddddd] bg-white px-3 py-2 text-primary duration-300 hover:bg-[#eceeef]"
-                >2</a
-              >
-            </li>
-            <li>
-              <a
-                href="javascript:;"
-                class="-ml-[1px] block border border-[#dddddd] bg-white px-3 py-2 text-primary duration-300 hover:bg-[#eceeef]"
-                >3</a
-              >
-            </li>
-          </ul>
         </div>
         <div>
           <div class="rounded bg-[#f3f3f3] p-2.5">
