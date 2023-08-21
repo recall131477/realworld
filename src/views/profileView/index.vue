@@ -5,14 +5,19 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user';
 import type { Author } from '@/types';
 import type { ErrorObject } from '@/types/error';
 import { getProfile } from '@/api';
 import ArticleListComponent from '@/components/ArticleListComponent.vue';
 
 const route = useRoute();
+
+const userStore = useUserStore();
+const { userInfo, isLoggedIn } = storeToRefs(userStore);
 
 const profile = ref<Author>({
   username: '',
@@ -22,6 +27,10 @@ const profile = ref<Author>({
 });
 
 const errors = ref<ErrorObject>({});
+
+const isCurrentUser = computed(() => {
+  return isLoggedIn && userInfo.value?.username === profile.value.username;
+});
 
 const fetchProfile = async () => {
   try {
@@ -54,6 +63,7 @@ onMounted(() => {
           <router-link
             :to="{ name: 'settings' }"
             class="inline-block rounded border border-[#999999] px-2 py-1 text-sm leading-tight text-[#999999] duration-300 hover:bg-[#cccccc]"
+            v-if="isCurrentUser"
           >
             <i class="ion-gear-a"></i> Edit Profile Settings
           </router-link>
