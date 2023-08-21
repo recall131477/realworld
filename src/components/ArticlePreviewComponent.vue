@@ -27,6 +27,8 @@ const router = useRouter();
 const userStore = useUserStore();
 const { isLoggedIn } = storeToRefs(userStore);
 
+const isFavoriting = ref(false);
+
 const errors = ref<ErrorObject>({});
 
 const toggleFavorite = async () => {
@@ -35,6 +37,8 @@ const toggleFavorite = async () => {
       name: 'login',
     });
   }
+
+  isFavoriting.value = true;
 
   try {
     const res = props.article.favorited
@@ -45,6 +49,8 @@ const toggleFavorite = async () => {
   } catch (error) {
     errors.value = (error as any).errors;
   }
+
+  isFavoriting.value = false;
 };
 </script>
 
@@ -85,6 +91,7 @@ const toggleFavorite = async () => {
           'bg-primary text-white': article.favorited,
           'text-primary': !article.favorited,
         }"
+        :disabled="isFavoriting"
         @click="toggleFavorite"
       >
         <i class="ion-heart"></i> {{ article.favoritesCount }}
