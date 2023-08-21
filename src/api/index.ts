@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 
-import type { User, UserInfo, Article, ArticleConfig } from '@/types';
+import type { User, UserInfo, Author, Article, ArticleConfig } from '@/types';
 
 /** user */
 export const login = (params: { user: User }): Promise<{ user: UserInfo }> => {
@@ -75,5 +75,13 @@ export const unfavoriteArticle = (
   return request({
     method: 'DELETE',
     url: `/articles/${slug}/favorite`,
+  });
+};
+
+/** profile */
+export const getProfile = (username: string): Promise<{ profile: Author }> => {
+  return request({
+    method: 'GET',
+    url: `/profiles/${username}`,
   });
 };
