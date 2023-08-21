@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
@@ -44,6 +44,14 @@ const fetchProfile = async () => {
 onMounted(() => {
   fetchProfile();
 });
+
+watch(
+  () => route.params.username,
+  () => {
+    fetchProfile();
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -67,6 +75,16 @@ onMounted(() => {
           >
             <i class="ion-gear-a"></i> Edit Profile Settings
           </router-link>
+          <button
+            type="button"
+            class="inline-block rounded border border-[#999999] px-2 py-1 text-sm leading-tight text-[#999999] hover:bg-[#cccccc] disabled:pointer-events-none disabled:opacity-60"
+            :class="{ 'bg-white text-[#373a3c]': profile.following }"
+            v-else
+          >
+            <i class="ion-plus-round"></i>
+            &nbsp; {{ profile.following ? 'Unfollow' : 'Follow' }}
+            {{ profile.username }}
+          </button>
         </div>
       </div>
     </div>
