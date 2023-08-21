@@ -6,15 +6,16 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
 import type { Author } from '@/types';
 import type { ErrorObject } from '@/types/error';
-import { getProfile } from '@/api';
+import { getProfile, followProfile, unfollowProfile } from '@/api';
 import ArticleListComponent from '@/components/ArticleListComponent.vue';
 
 const route = useRoute();
+const router = useRouter();
 
 const userStore = useUserStore();
 const { userInfo, isLoggedIn } = storeToRefs(userStore);
@@ -25,6 +26,8 @@ const profile = ref<Author>({
   image: '',
   following: false,
 });
+
+const isFollowing = ref(false);
 
 const errors = ref<ErrorObject>({});
 
@@ -39,6 +42,27 @@ const fetchProfile = async () => {
   } catch (error) {
     errors.value = (error as any).errors;
   }
+};
+
+const toggleFollow = async () => {
+  if (!isLoggedIn.value) {
+    router.push({
+      name: 'login',
+    });
+  }
+
+  isFollowing.value = true;
+
+  try {
+    const res = profile.value.following
+      ? await unfollowProfile(profile.value.username)
+      : await followProfile(profile.value.username);
+    profile.value.following = res.profile.following;
+  } catch (error) {
+    errors.value = (error as any).errors;
+  }
+
+  isFollowing.value = false;
 };
 
 onMounted(() => {
@@ -79,6 +103,8 @@ watch(
             type="button"
             class="inline-block rounded border border-[#999999] px-2 py-1 text-sm leading-tight text-[#999999] hover:bg-[#cccccc] disabled:pointer-events-none disabled:opacity-60"
             :class="{ 'bg-white text-[#373a3c]': profile.following }"
+            :disabled="isFollowing"
+            @click="toggleFollow"
             v-else
           >
             <i class="ion-plus-round"></i>

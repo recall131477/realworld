@@ -85,3 +85,21 @@ export const getProfile = (username: string): Promise<{ profile: Author }> => {
     url: `/profiles/${username}`,
   });
 };
+
+export const followProfile = (
+  username: string
+): Promise<{ profile: Author }> => {
+  return request({
+    method: 'POST',
+    url: `/profiles/${username}/follow`,
+  });
+};
+
+export const unfollowProfile = (
+  username: string
+): Promise<{ profile: Author }> => {
+  return request({
+    method: 'DELETE',
+    url: `/profiles/${username}/follow`,
+  });
+};
