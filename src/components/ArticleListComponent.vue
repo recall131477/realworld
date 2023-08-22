@@ -83,7 +83,7 @@ onMounted(() => {
 });
 
 watch(
-  () => route,
+  route,
   () => {
     fetchArticles();
   },
