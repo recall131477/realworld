@@ -76,7 +76,7 @@ const logout = () => {
                     username: userInfo?.username,
                   },
                 }"
-                class="flex items-center px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
+                class="flex items-center gap-x-1 px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
               >
                 <img
                   :src="userInfo?.image"
