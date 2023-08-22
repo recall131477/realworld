@@ -97,6 +97,13 @@ export const updateArticle = (
   });
 };
 
+export const deleteArticle = (slug: string): Promise<void> => {
+  return request({
+    method: 'DELETE',
+    url: `/articles/${slug}`,
+  });
+};
+
 /** favorite */
 export const favoriteArticle = (
   slug: string

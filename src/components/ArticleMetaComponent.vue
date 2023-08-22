@@ -13,6 +13,7 @@ import { Article } from '@/types';
 import type { ErrorObject } from '@/types/error';
 import { formatDate } from '@/helper';
 import {
+  deleteArticle,
   followProfile,
   unfollowProfile,
   favoriteArticle,
@@ -35,6 +36,7 @@ const { userInfo, isLoggedIn } = storeToRefs(userStore);
 
 const tempArticle = ref<Article>(JSON.parse(JSON.stringify(props.article)));
 
+const isDeleting = ref(false);
 const isFollowing = ref(false);
 const isFavoriting = ref(false);
 
@@ -89,6 +91,19 @@ const toggleFavorite = async () => {
   isFavoriting.value = false;
 };
 
+const handleDeleteArticle = async () => {
+  isDeleting.value = true;
+
+  try {
+    await deleteArticle(tempArticle.value.slug);
+    router.push({ name: 'global-feed' });
+  } catch (error) {
+    errors.value = (error as any).errors;
+  }
+
+  isDeleting.value = false;
+};
+
 watch(
   () => props.article,
   (newValue) => {
@@ -141,14 +156,16 @@ watch(
               slug: tempArticle.slug,
             },
           }"
-          class="inline-block rounded border border-[#cccccc] px-2 py-1 text-sm leading-tight text-[#cccccc] hover:bg-[#cccccc] hover:text-[#373a3c]"
+          class="inline-block rounded border border-[#cccccc] px-2 py-1 text-sm leading-tight text-[#cccccc] duration-300 hover:bg-[#cccccc] hover:text-[#373a3c]"
         >
           <i class="ion-edit space">&nbsp;</i>
           Edit Article
         </router-link>
         <button
           type="button"
-          class="inline-block rounded border border-danger px-2 py-1 text-sm leading-tight text-danger hover:bg-danger hover:text-white"
+          class="inline-block rounded border border-danger px-2 py-1 text-sm leading-tight text-danger duration-300 hover:bg-danger hover:text-white"
+          :disabled="isDeleting"
+          @click="handleDeleteArticle"
         >
           <i class="ion-trash-a">&nbsp;</i>
           Delete Article
