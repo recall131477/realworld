@@ -5,50 +5,75 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { Article } from '@/types';
+import type { ErrorObject } from '@/types/error';
+import { getArticle } from '@/api';
 import ArticleMetaComponent from '@/components/ArticleMetaComponent.vue';
+
+const route = useRoute();
+
+const article = ref<Article>({
+  slug: '',
+  title: '',
+  description: '',
+  body: '',
+  tagList: [],
+  createdAt: '',
+  updatedAt: '',
+  favorited: false,
+  favoritesCount: 0,
+  author: {
+    username: '',
+    image: '',
+    bio: '',
+    following: false,
+  },
+});
+
+const errors = ref<ErrorObject>({});
+
+const fetchArticle = async () => {
+  try {
+    const res = await getArticle(route.params.slug as string);
+    article.value = res.article;
+  } catch (error) {
+    errors.value = (error as any).errors;
+  }
+};
+
+onMounted(() => {
+  fetchArticle();
+});
 </script>
 
 <template>
   <div class="bg-[#333333] py-8 text-white">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <h1 class="mb-8 text-[44px] font-semibold leading-none">
-        Try to transmit the HTTP card, maybe it will override the multi-byte
-        hard drive!
+        {{ article.title }}
       </h1>
-      <ArticleMetaComponent />
+      <ArticleMetaComponent :article="article" />
     </div>
   </div>
   <div class="pt-8">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="font-serif text-lg">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
-        asperiores iusto distinctio aspernatur fugiat dolorem quae odit
-        repellendus similique cupiditate animi quidem, maxime explicabo optio
-        temporibus eveniet mollitia eum! Quos nulla veritatis expedita culpa
-        nostrum, incidunt repellat ullam accusamus ea laboriosam inventore nisi
-        assumenda, explicabo aut, ab dolore facere voluptate!
+        {{ article.body }}
       </div>
       <ul class="mt-8 flex gap-1">
-        <li>
-          <a
-            href="javascript:;"
+        <li v-for="tag in article.tagList" :key="tag">
+          <router-link
+            :to="{ name: 'tag', params: { tag: tag } }"
             class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+            >{{ tag }}</router-link
           >
-            voluptate
-          </a>
-        </li>
-        <li>
-          <a
-            href="javascript:;"
-            class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
-          >
-            rerum
-          </a>
         </li>
       </ul>
       <div class="mb-12 mt-8 border-t border-black/10 pt-6">
         <div class="flex justify-center">
-          <ArticleMetaComponent />
+          <ArticleMetaComponent :article="article" />
         </div>
       </div>
       <div class="space-y-3 md:mx-auto md:w-2/3">

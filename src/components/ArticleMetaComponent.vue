@@ -4,15 +4,58 @@ export default {
 };
 </script>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+import { Article } from '@/types';
+import { formatDate } from '@/helper';
+
+const props = defineProps<{
+  article: Article;
+}>();
+
+const tempArticle = ref<Article>(JSON.parse(JSON.stringify(props.article)));
+
+watch(
+  () => props.article,
+  (newValue) => {
+    tempArticle.value = JSON.parse(JSON.stringify(newValue));
+  },
+  { deep: true, immediate: true }
+);
+</script>
 
 <template>
   <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
     <div class="flex items-center gap-x-2">
-      <a href="javascript:;" class="h-8 w-8 rounded-full bg-pink-500"></a>
+      <router-link
+        :to="{
+          name: 'profile',
+          params: { username: article.author.username },
+        }"
+        v-if="tempArticle.author.username"
+      >
+        <img
+          class="h-8 w-8 rounded-full object-cover"
+          :src="tempArticle.author.image"
+          :alt="tempArticle.author.username"
+        />
+      </router-link>
       <div>
-        <a href="javascript:;" class="block font-medium">Anah</a>
-        <span class="block text-xs text-[#bbbbbb]">2022/12/9</span>
+        <router-link
+          :to="{
+            name: 'profile',
+            params: {
+              username: tempArticle.author.username,
+            },
+          }"
+          class="block font-medium"
+          v-if="tempArticle.author.username"
+        >
+          {{ tempArticle.author.username }}
+        </router-link>
+        <span class="block text-xs text-[#bbbbbb]">{{
+          formatDate(tempArticle.createdAt)
+        }}</span>
       </div>
     </div>
     <div class="flex flex-wrap gap-x-2 gap-y-2">

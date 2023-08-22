@@ -59,6 +59,13 @@ export const getArticles = (
   });
 };
 
+export const getArticle = (slug: string): Promise<{ article: Article }> => {
+  return request({
+    method: 'GET',
+    url: `/articles/${slug}`,
+  });
+};
+
 /** favorite */
 export const favoriteArticle = (
   slug: string
