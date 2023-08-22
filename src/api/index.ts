@@ -1,6 +1,14 @@
 import request from '@/utils/request';
 
-import type { User, UserInfo, Author, Article, ArticleConfig } from '@/types';
+import type {
+  User,
+  UserInfo,
+  Author,
+  CreateArticle,
+  UpdateArticle,
+  Article,
+  ArticleConfig,
+} from '@/types';
 
 /** user */
 export const login = (params: { user: User }): Promise<{ user: UserInfo }> => {
@@ -63,6 +71,29 @@ export const getArticle = (slug: string): Promise<{ article: Article }> => {
   return request({
     method: 'GET',
     url: `/articles/${slug}`,
+  });
+};
+
+export const createArticle = (params: {
+  article: CreateArticle;
+}): Promise<{ article: Article }> => {
+  return request({
+    method: 'POST',
+    url: '/articles',
+    data: params,
+  });
+};
+
+export const updateArticle = (
+  slug: string,
+  params: {
+    article: UpdateArticle;
+  }
+): Promise<{ article: Article }> => {
+  return request({
+    method: 'PUT',
+    url: `/articles/${slug}`,
+    data: params,
   });
 };
 
