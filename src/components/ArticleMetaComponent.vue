@@ -20,7 +20,7 @@ watch(
   (newValue) => {
     tempArticle.value = JSON.parse(JSON.stringify(newValue));
   },
-  { deep: true, immediate: true }
+  { deep: true }
 );
 </script>
 
@@ -30,7 +30,7 @@ watch(
       <router-link
         :to="{
           name: 'profile',
-          params: { username: article.author.username },
+          params: { username: tempArticle.author.username },
         }"
         v-if="tempArticle.author.username"
       >
