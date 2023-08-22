@@ -43,6 +43,15 @@ const fetchArticle = async () => {
   }
 };
 
+const updateArticleFollow = () => {
+  article.value.author.following = !article.value.author.following;
+};
+
+const updateArticleFavorite = (item: Article) => {
+  article.value.favorited = item.favorited;
+  article.value.favoritesCount = item.favoritesCount;
+};
+
 onMounted(() => {
   fetchArticle();
 });
@@ -54,7 +63,11 @@ onMounted(() => {
       <h1 class="mb-8 text-[44px] font-semibold leading-none">
         {{ article.title }}
       </h1>
-      <ArticleMetaComponent :article="article" />
+      <ArticleMetaComponent
+        :article="article"
+        @update-follow="updateArticleFollow"
+        @update-favorite="updateArticleFavorite"
+      />
     </div>
   </div>
   <div class="pt-8">
@@ -73,7 +86,11 @@ onMounted(() => {
       </ul>
       <div class="mb-12 mt-8 border-t border-black/10 pt-6">
         <div class="flex justify-center">
-          <ArticleMetaComponent :article="article" />
+          <ArticleMetaComponent
+            :article="article"
+            @update-follow="updateArticleFollow"
+            @update-favorite="updateArticleFavorite"
+          />
         </div>
       </div>
       <div class="space-y-3 md:mx-auto md:w-2/3">
