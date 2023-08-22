@@ -72,7 +72,7 @@ const routes = [
     },
   },
   {
-    path: '/article/edit',
+    path: '/article/edit/:slug',
     name: 'edit-article',
     component: () => import('../views/articleView/editor.vue'),
     meta: {

@@ -135,7 +135,12 @@ watch(
     <div class="flex flex-wrap gap-x-2 gap-y-2">
       <template v-if="isCurrentUser">
         <router-link
-          :to="{ name: 'edit-article' }"
+          :to="{
+            name: 'edit-article',
+            params: {
+              slug: tempArticle.slug,
+            },
+          }"
           class="inline-block rounded border border-[#cccccc] px-2 py-1 text-sm leading-tight text-[#cccccc] hover:bg-[#cccccc] hover:text-[#373a3c]"
         >
           <i class="ion-edit space">&nbsp;</i>
