@@ -86,11 +86,8 @@ const toggleFavorite = async () => {
       </div>
       <button
         type="button"
-        class="inline-block rounded border border-primary px-2 py-1 text-sm leading-tight duration-300 hover:bg-primary hover:text-white disabled:pointer-events-none disabled:opacity-60"
-        :class="{
-          'bg-primary text-white': article.favorited,
-          'text-primary': !article.favorited,
-        }"
+        class="iinline-block rounded border border-primary px-2 py-1 text-sm leading-tight duration-300 hover:bg-primary hover:text-white disabled:pointer-events-none disabled:opacity-60"
+        :class="article.favorited ? 'bg-primary text-white' : 'text-primary'"
         :disabled="isFavoriting"
         @click="toggleFavorite"
       >
