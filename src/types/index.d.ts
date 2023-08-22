@@ -22,12 +22,21 @@ interface Author {
   following: boolean;
 }
 
-export interface Article {
-  slug: string;
+export interface CreateArticle {
   title: string;
   description: string;
   body: string;
   tagList: string[];
+}
+
+export interface UpdateArticle {
+  title: string;
+  description: string;
+  body: string;
+}
+
+export interface Article extends CreateArticle {
+  slug: string;
   createdAt: string;
   updatedAt: string;
   favorited: boolean;
