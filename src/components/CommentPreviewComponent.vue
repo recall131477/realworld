@@ -5,12 +5,20 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { Comment } from '@/types';
 import { formatDate } from '@/helper';
 
-defineProps<{
+const props = defineProps<{
   comment: Comment;
 }>();
+
+const formatTime = computed(() => {
+  const time = new Date(props.comment.createdAt);
+  const hour = time.getHours().toString().padStart(2, '0');
+  const minute = time.getMinutes().toString().padStart(2, '0');
+  return `${hour}:${minute}`;
+});
 </script>
 
 <template>
@@ -49,7 +57,9 @@ defineProps<{
         >
           {{ comment.author.username }}
         </router-link>
-        <span class="text-[#bbbbbb]">{{ formatDate(comment.createdAt) }}</span>
+        <span class="text-[#bbbbbb]"
+          >{{ formatDate(comment.createdAt) }} {{ formatTime }}</span
+        >
       </div>
       <span
         class="cursor-pointer text-base text-[#333333] opacity-60 duration-300 hover:opacity-100"
