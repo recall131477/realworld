@@ -40,7 +40,7 @@ const handleLogin = async () => {
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="md:mx-auto md:w-1/2">
         <div class="mb-4 text-center">
-          <h1 class="text-[40px]">Sign up</h1>
+          <h1 class="text-[40px]">Sign in</h1>
           <router-link :to="{ name: 'register' }" class="text-primary"
             >Need an account?</router-link
           >

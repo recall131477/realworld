@@ -48,7 +48,7 @@ const logout = () => {
               <router-link
                 :to="{ name: 'register' }"
                 class="block px-[15px] py-2.5 text-black/80 duration-300 hover:text-black/60 md:p-0"
-                >Sign Up</router-link
+                >Sign up</router-link
               >
             </li>
           </template>
