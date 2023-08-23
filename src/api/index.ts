@@ -128,6 +128,13 @@ export const createComment = (
   });
 };
 
+export const deleteComment = (slug: string, id: number): Promise<void> => {
+  return request({
+    method: 'DELETE',
+    url: `/articles/${slug}/comments/${id}`,
+  });
+};
+
 /** favorite */
 export const favoriteArticle = (
   slug: string

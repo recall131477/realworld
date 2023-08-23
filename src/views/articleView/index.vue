@@ -73,6 +73,11 @@ const createComment = (comment: Comment) => {
   comments.value.push(comment);
 };
 
+const deleteComment = (id: number) => {
+  const index = comments.value.findIndex((comment) => comment.id === id);
+  comments.value.splice(index, 1);
+};
+
 const updateArticleFollow = () => {
   article.value.author.following = !article.value.author.following;
 };
@@ -149,6 +154,7 @@ onMounted(() => {
           v-for="comment in sortedComment"
           :key="comment.id"
           :comment="comment"
+          @delete-comment="deleteComment"
         />
       </div>
     </div>

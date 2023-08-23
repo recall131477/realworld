@@ -5,13 +5,26 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
 import type { Comment } from '@/types';
+import type { ErrorObject } from '@/types/error';
 import { formatDate } from '@/helper';
+import { deleteComment } from '@/api';
 
 const props = defineProps<{
   comment: Comment;
 }>();
+
+const emit = defineEmits<{
+  (event: 'delete-comment', id: number): void;
+}>();
+
+const route = useRoute();
+
+const isDeleting = ref(false);
+
+const errors = ref<ErrorObject>({});
 
 const formatTime = computed(() => {
   const time = new Date(props.comment.createdAt);
@@ -19,6 +32,19 @@ const formatTime = computed(() => {
   const minute = time.getMinutes().toString().padStart(2, '0');
   return `${hour}:${minute}`;
 });
+
+const handleDeleteComment = async () => {
+  isDeleting.value = true;
+
+  try {
+    await deleteComment(route.params.slug as string, props.comment.id);
+    emit('delete-comment', props.comment.id);
+  } catch (error) {
+    errors.value = (error as any).errors;
+  }
+
+  isDeleting.value = false;
+};
 </script>
 
 <template>
@@ -63,6 +89,8 @@ const formatTime = computed(() => {
       </div>
       <span
         class="cursor-pointer text-base text-[#333333] opacity-60 duration-300 hover:opacity-100"
+        :class="isDeleting ? 'pointer-events-none' : 'pointer-events-auto'"
+        @click="handleDeleteComment"
       >
         <i class="ion-trash-a"></i>
       </span>
