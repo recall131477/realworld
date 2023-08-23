@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Article, Comment } from '@/types';
 import type { ErrorObject } from '@/types/error';
@@ -37,6 +37,15 @@ const comments = ref<Comment[]>([]);
 
 const errors = ref<ErrorObject>({});
 
+const sortedComment = computed(() => {
+  return comments.value
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+});
+
 const fetchArticle = async () => {
   try {
     const res = await getArticle(route.params.slug as string);
@@ -50,7 +59,6 @@ const fetchComments = async () => {
   try {
     const res = await getComments(route.params.slug as string);
     comments.value = res.comments;
-    console.log(comments.value);
   } catch (error) {
     errors.value = (error as any).errors;
   }
@@ -115,7 +123,7 @@ onMounted(() => {
         <CommentFormComponent @create-comment="createComment" />
         <p>Sign in</p>
         <CommentPreviewComponent
-          v-for="comment in comments"
+          v-for="comment in sortedComment"
           :key="comment.id"
           :comment="comment"
         />
