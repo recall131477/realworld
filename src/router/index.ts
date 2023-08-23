@@ -17,6 +17,14 @@ const routes = [
     },
   },
   {
+    path: '/article/:slug',
+    name: 'article',
+    component: () => import('../views/articleView/index.vue'),
+    meta: {
+      title: 'article',
+    },
+  },
+  {
     path: '/register',
     name: 'register',
     component: () => import('../views/registerView/index.vue'),
@@ -50,15 +58,6 @@ const routes = [
     component: () => import('../views/settingsView/index.vue'),
     meta: {
       title: 'settings',
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/article/:slug',
-    name: 'article',
-    component: () => import('../views/articleView/index.vue'),
-    meta: {
-      title: 'article',
       requiresAuth: true,
     },
   },
