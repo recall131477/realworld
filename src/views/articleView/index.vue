@@ -7,10 +7,12 @@ export default {
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { Article } from '@/types';
+import { Article, Comment } from '@/types';
 import type { ErrorObject } from '@/types/error';
-import { getArticle } from '@/api';
+import { getArticle, getComments } from '@/api';
 import ArticleMetaComponent from '@/components/ArticleMetaComponent.vue';
+import CommentFormComponent from '@/components/CommentFormComponent.vue';
+import CommentPreviewComponent from '@/components/CommentPreviewComponent.vue';
 
 const route = useRoute();
 
@@ -31,6 +33,7 @@ const article = ref<Article>({
     following: false,
   },
 });
+const comments = ref<Comment[]>([]);
 
 const errors = ref<ErrorObject>({});
 
@@ -38,6 +41,16 @@ const fetchArticle = async () => {
   try {
     const res = await getArticle(route.params.slug as string);
     article.value = res.article;
+  } catch (error) {
+    errors.value = (error as any).errors;
+  }
+};
+
+const fetchComments = async () => {
+  try {
+    const res = await getComments(route.params.slug as string);
+    comments.value = res.comments;
+    console.log(comments.value);
   } catch (error) {
     errors.value = (error as any).errors;
   }
@@ -54,6 +67,7 @@ const updateArticleFavorite = (item: Article) => {
 
 onMounted(() => {
   fetchArticle();
+  fetchComments();
 });
 </script>
 
@@ -112,6 +126,12 @@ onMounted(() => {
             </button>
           </div>
         </form>
+        <p>Sign in</p>
+        <CommentPreviewComponent
+          v-for="comment in comments"
+          :key="comment.id"
+          :comment="comment"
+        />
       </div>
     </div>
   </div>

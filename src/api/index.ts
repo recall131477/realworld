@@ -8,6 +8,7 @@ import type {
   UpdateArticle,
   Article,
   ArticleConfig,
+  Comment,
 } from '@/types';
 
 /** user */
@@ -101,6 +102,14 @@ export const deleteArticle = (slug: string): Promise<void> => {
   return request({
     method: 'DELETE',
     url: `/articles/${slug}`,
+  });
+};
+
+/** comment */
+export const getComments = (slug: string): Promise<{ comments: Comment[] }> => {
+  return request({
+    method: 'GET',
+    url: `/articles/${slug}/comments`,
   });
 };
 
