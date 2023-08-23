@@ -7,6 +7,8 @@ export default {
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user';
 import { Article, Comment } from '@/types';
 import type { ErrorObject } from '@/types/error';
 import { getArticle, getComments } from '@/api';
@@ -15,6 +17,9 @@ import CommentFormComponent from '@/components/CommentFormComponent.vue';
 import CommentPreviewComponent from '@/components/CommentPreviewComponent.vue';
 
 const route = useRoute();
+
+const userStore = useUserStore();
+const { isLoggedIn } = storeToRefs(userStore);
 
 const article = ref<Article>({
   slug: '',
@@ -120,8 +125,26 @@ onMounted(() => {
         </div>
       </div>
       <div class="space-y-3 md:mx-auto md:w-2/3">
-        <CommentFormComponent @create-comment="createComment" />
-        <p>Sign in</p>
+        <CommentFormComponent
+          v-if="isLoggedIn"
+          @create-comment="createComment"
+        />
+        <p v-else>
+          <router-link
+            :to="{ name: 'login' }"
+            class="duration-300 hover:border-b hover:border-black"
+          >
+            Sign in
+          </router-link>
+          or
+          <router-link
+            :to="{ name: 'register' }"
+            class="duration-300 hover:border-b hover:border-black"
+          >
+            Sign up
+          </router-link>
+          to add comments on this article.
+        </p>
         <CommentPreviewComponent
           v-for="comment in sortedComment"
           :key="comment.id"
