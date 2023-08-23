@@ -61,7 +61,7 @@ const calculatePage = computed(() => {
       pages = withDots(1, [1, '...']).concat(pages);
     }
 
-    if (pages[pages.length - 1] < totalPage.value) {
+    if (Number(pages[pages.length - 1]) < totalPage.value) {
       pages = pages.concat(withDots(totalPage.value, ['...', totalPage.value]));
     }
 
