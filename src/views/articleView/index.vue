@@ -56,6 +56,10 @@ const fetchComments = async () => {
   }
 };
 
+const createComment = (comment: Comment) => {
+  comments.value.push(comment);
+};
+
 const updateArticleFollow = () => {
   article.value.author.following = !article.value.author.following;
 };
@@ -108,24 +112,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="space-y-3 md:mx-auto md:w-2/3">
-        <form class="rounded border border-[#e5e5e5]">
-          <textarea
-            class="block w-full resize-none rounded bg-white p-5 leading-tight text-[#55595c] outline-none disabled:pointer-events-none disabled:bg-[#eceeef]"
-            rows="3"
-            placeholder="Write a comment..."
-          ></textarea>
-          <div
-            class="flex justify-between border-t border-[#e5e5e5] bg-[#f5f5f5] px-5 py-3"
-          >
-            <a href="javascript:;" class="h-8 w-8 rounded-full bg-pink-500"></a>
-            <button
-              type="button"
-              class="inline-block rounded bg-primary px-2 py-1 text-sm text-white duration-300 hover:bg-primary-dark disabled:pointer-events-none disabled:opacity-60"
-            >
-              Post Comment
-            </button>
-          </div>
-        </form>
+        <CommentFormComponent @create-comment="createComment" />
         <p>Sign in</p>
         <CommentPreviewComponent
           v-for="comment in comments"

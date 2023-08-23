@@ -113,6 +113,21 @@ export const getComments = (slug: string): Promise<{ comments: Comment[] }> => {
   });
 };
 
+export const createComment = (
+  slug: string,
+  params: {
+    comment: {
+      body: string;
+    };
+  }
+): Promise<{ comment: Comment }> => {
+  return request({
+    method: 'POST',
+    url: `/articles/${slug}/comments`,
+    data: params,
+  });
+};
+
 /** favorite */
 export const favoriteArticle = (
   slug: string
