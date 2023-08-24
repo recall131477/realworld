@@ -77,6 +77,10 @@ const updateArticleFavorite = (article: Article) => {
 
   articles.value[index].favorited = article.favorited;
   articles.value[index].favoritesCount = article.favoritesCount;
+
+  if (route.name === 'profile-favorites') {
+    fetchArticles();
+  }
 };
 
 const changePage = (page: number) => {
