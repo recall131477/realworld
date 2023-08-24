@@ -24,10 +24,14 @@ const { userInfo } = storeToRefs(userStore);
 
 const content = ref('');
 
+const isLoading = ref(false);
+
 const errors = ref<ErrorObject>({});
 
 const handleCreateComment = async () => {
   if (content.value === '') return;
+
+  isLoading.value = true;
 
   try {
     const res = await createComment(route.params.slug as string, {
@@ -40,6 +44,8 @@ const handleCreateComment = async () => {
   } catch (error) {
     errors.value = (error as any).errors;
   }
+
+  isLoading.value = false;
 };
 </script>
 
@@ -52,6 +58,7 @@ const handleCreateComment = async () => {
       class="block w-full resize-none rounded bg-white p-5 leading-tight text-[#55595c] outline-none disabled:pointer-events-none disabled:bg-[#eceeef]"
       rows="3"
       placeholder="Write a comment..."
+      :disabled="isLoading"
       v-model.trim="content"
     ></textarea>
     <div
@@ -65,7 +72,7 @@ const handleCreateComment = async () => {
       <button
         type="submit"
         class="inline-block rounded bg-primary px-2 py-1 text-sm text-white duration-300 hover:bg-primary-dark disabled:pointer-events-none disabled:opacity-60"
-        :disabled="content === ''"
+        :disabled="isLoading || content === ''"
       >
         Post Comment
       </button>

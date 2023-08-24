@@ -27,6 +27,8 @@ const user = ref<UserInfo>({
   image: '',
 });
 
+const isLoading = ref(false);
+
 const errors = ref<ErrorObject>({});
 
 onMounted(() => {
@@ -42,6 +44,8 @@ onMounted(() => {
 });
 
 const handleUpdateUser = async () => {
+  isLoading.value = true;
+
   try {
     const res = await updateUser({ user: user.value });
     setUser(res.user);
@@ -54,6 +58,8 @@ const handleUpdateUser = async () => {
   } catch (error) {
     errors.value = (error as any).errors;
   }
+
+  isLoading.value = false;
 };
 </script>
 
@@ -68,7 +74,7 @@ const handleUpdateUser = async () => {
           </li>
         </ul>
         <form @submit.prevent="handleUpdateUser">
-          <fieldset class="space-y-4">
+          <fieldset class="space-y-4" :disabled="isLoading">
             <fieldset class="form-group">
               <input
                 type="text"

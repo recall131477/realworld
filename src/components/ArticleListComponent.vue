@@ -20,9 +20,13 @@ const articles = ref<Article[]>([]);
 const articlesCount = ref(0);
 const currentPage = ref(1);
 
+const isLoading = ref(false);
+
 const errors = ref<ErrorObject>({});
 
 const fetchArticles = async () => {
+  isLoading.value = true;
+
   const config: ArticleConfig = {
     type: route.name as ArticleType,
     params: {
@@ -39,6 +43,8 @@ const fetchArticles = async () => {
   } catch (error) {
     errors.value = (error as any).errors;
   }
+
+  isLoading.value = false;
 };
 
 const setArticleParams = (
@@ -92,17 +98,27 @@ watch(
 </script>
 
 <template>
-  <ul>
-    <li v-for="article in articles" :key="article.slug">
-      <ArticlePreviewComponent
-        :article="article"
-        @update-article-favorite="updateArticleFavorite"
+  <div v-if="isLoading" class="border-t border-black/10 py-6">
+    Loading articles...
+  </div>
+  <template v-else>
+    <div v-if="!articles.length" class="border-t border-black/10 py-6">
+      No articles are here... yet.
+    </div>
+    <template v-else>
+      <ul>
+        <li v-for="article in articles" :key="article.slug">
+          <ArticlePreviewComponent
+            :article="article"
+            @update-article-favorite="updateArticleFavorite"
+          />
+        </li>
+      </ul>
+      <PaginationComponent
+        :articles-count="articlesCount"
+        :current-page="currentPage"
+        @change-page="changePage"
       />
-    </li>
-  </ul>
-  <PaginationComponent
-    :articles-count="articlesCount"
-    :current-page="currentPage"
-    @change-page="changePage"
-  />
+    </template>
+  </template>
 </template>

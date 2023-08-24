@@ -40,6 +40,8 @@ const article = ref<Article>({
 });
 const comments = ref<Comment[]>([]);
 
+const isLoading = ref(false);
+
 const errors = ref<ErrorObject>({});
 
 const sortedComment = computed(() => {
@@ -87,13 +89,275 @@ const updateArticleFavorite = (item: Article) => {
   article.value.favoritesCount = item.favoritesCount;
 };
 
-onMounted(() => {
-  fetchArticle();
-  fetchComments();
+onMounted(async () => {
+  isLoading.value = true;
+
+  try {
+    await Promise.all([fetchArticle(), fetchComments()]);
+  } catch (error) {
+    errors.value = (error as any).errors;
+  }
+
+  isLoading.value = false;
 });
 </script>
 
 <template>
+  <div
+    class="fixed left-0 top-0 z-[999] h-full w-full bg-[#f1f2f3] duration-300"
+    :class="{
+      'invisible opacity-0': !isLoading,
+      'visible opacity-100': isLoading,
+    }"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      style="margin: auto; display: block"
+      width="200px"
+      height="200px"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid"
+      class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+    >
+      <circle cx="75" cy="50" fill="#ffffff" r="5">
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.9166666666666666s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.9166666666666666s"
+        ></animate>
+      </circle>
+      <circle cx="71.65063509461098" cy="62.5" fill="#ffffff" r="5">
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.8333333333333334s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.8333333333333334s"
+        ></animate>
+      </circle>
+      <circle cx="62.5" cy="71.65063509461096" fill="#ffffff" r="5">
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.75s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.75s"
+        ></animate>
+      </circle>
+      <circle cx="50" cy="75" fill="#ffffff" r="5">
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.6666666666666666s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.6666666666666666s"
+        ></animate>
+      </circle>
+      <circle
+        cx="37.50000000000001"
+        cy="71.65063509461098"
+        fill="#ffffff"
+        r="5"
+      >
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.5833333333333334s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.5833333333333334s"
+        ></animate>
+      </circle>
+      <circle cx="28.34936490538903" cy="62.5" fill="#ffffff" r="5">
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.5s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.5s"
+        ></animate>
+      </circle>
+      <circle cx="25" cy="50" fill="#ffffff" r="5">
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.4166666666666667s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.4166666666666667s"
+        ></animate>
+      </circle>
+      <circle
+        cx="28.34936490538903"
+        cy="37.50000000000001"
+        fill="#ffffff"
+        r="5"
+      >
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.3333333333333333s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.3333333333333333s"
+        ></animate>
+      </circle>
+      <circle
+        cx="37.499999999999986"
+        cy="28.34936490538904"
+        fill="#ffffff"
+        r="5"
+      >
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.25s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.25s"
+        ></animate>
+      </circle>
+      <circle cx="49.99999999999999" cy="25" fill="#ffffff" r="5">
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.16666666666666666s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.16666666666666666s"
+        ></animate>
+      </circle>
+      <circle cx="62.5" cy="28.349364905389034" fill="#ffffff" r="5">
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="-0.08333333333333333s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="-0.08333333333333333s"
+        ></animate>
+      </circle>
+      <circle
+        cx="71.65063509461096"
+        cy="37.499999999999986"
+        fill="#ffffff"
+        r="5"
+      >
+        <animate
+          attributeName="r"
+          values="3;3;5;3;3"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          repeatCount="indefinite"
+          begin="0s"
+        ></animate>
+        <animate
+          attributeName="fill"
+          values="#ffffff;#ffffff;#000000;#ffffff;#ffffff"
+          repeatCount="indefinite"
+          times="0;0.1;0.2;0.3;1"
+          dur="1s"
+          begin="0s"
+        ></animate>
+      </circle>
+    </svg>
+  </div>
   <div class="bg-[#333333] py-8 text-white">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <h1 class="mb-8 text-[44px] font-semibold leading-none">
@@ -160,3 +424,18 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 0.625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  animation: mulShdSpin 1.1s infinite ease;
+}
+</style>

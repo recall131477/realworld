@@ -22,9 +22,13 @@ const user = ref<User>({
   password: '',
 });
 
+const isLoading = ref(false);
+
 const errors = ref<ErrorObject>({});
 
 const handleLogin = async () => {
+  isLoading.value = true;
+
   try {
     const res = await login({ user: user.value });
     setUser(res.user);
@@ -32,6 +36,8 @@ const handleLogin = async () => {
   } catch (error) {
     errors.value = (error as any).errors;
   }
+
+  isLoading.value = false;
 };
 </script>
 
@@ -51,7 +57,7 @@ const handleLogin = async () => {
           </li>
         </ul>
         <form @submit.prevent="handleLogin">
-          <fieldset class="space-y-4">
+          <fieldset class="space-y-4" :disabled="isLoading">
             <fieldset>
               <input
                 type="email"

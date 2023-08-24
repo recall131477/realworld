@@ -23,9 +23,13 @@ const user = ref<User>({
   password: '',
 });
 
+const isLoading = ref(false);
+
 const errors = ref<ErrorObject>({});
 
 const handleRegister = async () => {
+  isLoading.value = true;
+
   try {
     const res = await register({ user: user.value });
     setUser(res.user);
@@ -33,6 +37,8 @@ const handleRegister = async () => {
   } catch (error) {
     errors.value = (error as any).errors;
   }
+
+  isLoading.value = false;
 };
 </script>
 
@@ -52,7 +58,7 @@ const handleRegister = async () => {
           </li>
         </ul>
         <form @submit.prevent="handleRegister">
-          <fieldset class="space-y-4">
+          <fieldset class="space-y-4" :disabled="isLoading">
             <fieldset>
               <input
                 type="text"
