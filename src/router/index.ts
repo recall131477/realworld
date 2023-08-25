@@ -57,7 +57,7 @@ const routes = [
     name: 'my-feed',
     component: () => import('../views/homeView/index.vue'),
     meta: {
-      title: 'my-feed',
+      title: 'my feed',
       requiresAuth: true,
     },
   },
@@ -75,7 +75,7 @@ const routes = [
     name: 'create-article',
     component: () => import('../views/articleView/editor.vue'),
     meta: {
-      title: 'create-article',
+      title: 'create article',
       requiresAuth: true,
     },
   },
@@ -84,7 +84,7 @@ const routes = [
     name: 'edit-article',
     component: () => import('../views/articleView/editor.vue'),
     meta: {
-      title: 'edit-article',
+      title: 'edit article',
       requiresAuth: true,
     },
   },
@@ -102,7 +102,7 @@ const routes = [
     name: 'profile-favorites',
     component: () => import('../views/profileView/index.vue'),
     meta: {
-      title: 'profile-favorites',
+      title: 'profile favorites',
       requiresAuth: true,
     },
   },
