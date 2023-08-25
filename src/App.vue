@@ -1,6 +1,16 @@
 <script setup lang="ts">
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
 import HeaderLayout from '@/components/layout/headerLayout/index.vue';
 import FooterLayout from '@/components/layout/footerLayout/index.vue';
+
+const route = useRoute();
+
+watch(route, (to) => {
+  const nowTitle = to.meta.title || '';
+
+  document.title = nowTitle === '' ? 'Conduit' : `${nowTitle} - Conduit`;
+});
 </script>
 
 <template>

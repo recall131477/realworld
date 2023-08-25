@@ -84,7 +84,7 @@ const routes = [
     name: 'profile',
     component: () => import('../views/profileView/index.vue'),
     meta: {
-      title: 'my-feed',
+      title: 'profile',
       requiresAuth: true,
     },
   },
@@ -93,7 +93,7 @@ const routes = [
     name: 'profile-favorites',
     component: () => import('../views/profileView/index.vue'),
     meta: {
-      title: 'my-feed',
+      title: 'profile-favorites',
       requiresAuth: true,
     },
   },
