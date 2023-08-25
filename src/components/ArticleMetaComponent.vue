@@ -61,6 +61,7 @@ const toggleFollow = async () => {
     tempArticle.value.author.following
       ? await unfollowProfile(tempArticle.value.author.username)
       : await followProfile(tempArticle.value.author.username);
+
     emit('update-follow');
   } catch (error) {
     errors.value = (error as any).errors;
@@ -142,7 +143,7 @@ watch(
         >
           {{ tempArticle.author.username }}
         </router-link>
-        <span class="block text-xs text-[#bbbbbb]">{{
+        <span class="block text-xs text-[#bbb]">{{
           formatDate(tempArticle.createdAt)
         }}</span>
       </div>
@@ -156,7 +157,7 @@ watch(
               slug: tempArticle.slug,
             },
           }"
-          class="inline-block rounded border border-[#cccccc] px-2 py-1 text-sm leading-tight text-[#cccccc] duration-300 hover:bg-[#cccccc] hover:text-[#373a3c]"
+          class="inline-block rounded border border-[#ccc] px-2 py-1 text-sm leading-tight text-[#ccc] duration-300 hover:bg-[#ccc] hover:text-[#373a3c]"
         >
           <i class="ion-edit space">&nbsp;</i>
           Edit Article

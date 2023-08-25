@@ -8,9 +8,9 @@ export default {
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
+import { useUserStore } from '@/stores/user';
 import type { UserInfo } from '@/types';
 import type { ErrorObject } from '@/types/error';
-import { useUserStore } from '@/stores/user';
 import { updateUser } from '@/api';
 
 const router = useRouter();
@@ -49,6 +49,7 @@ const handleUpdateUser = async () => {
   try {
     const res = await updateUser({ user: user.value });
     setUser(res.user);
+
     router.push({
       name: 'profile',
       params: {
@@ -80,7 +81,7 @@ const handleUpdateUser = async () => {
                 type="text"
                 id="profileUrl"
                 name="profileUrl"
-                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999999]"
+                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999]"
                 placeholder="URL of profile picture"
                 v-model="user.image"
               />
@@ -91,14 +92,14 @@ const handleUpdateUser = async () => {
                 id="userName"
                 name="userName"
                 autocomplete="userName"
-                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999999]"
+                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999]"
                 placeholder="Your Name"
                 v-model="user.username"
               />
             </fieldset>
             <fieldset class="form-group">
               <textarea
-                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999999]"
+                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999]"
                 rows="8"
                 placeholder="Short bio about you"
                 v-model="user.bio"
@@ -110,7 +111,7 @@ const handleUpdateUser = async () => {
                 id="email"
                 name="email"
                 autocomplete="email"
-                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999999]"
+                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999]"
                 placeholder="Email"
                 v-model="user.email"
               />
@@ -121,7 +122,7 @@ const handleUpdateUser = async () => {
                 id="password"
                 name="password"
                 autocomplete="current-password"
-                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999999]"
+                class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999]"
                 placeholder="Password"
                 v-model="user.password"
               />

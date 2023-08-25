@@ -38,6 +38,7 @@ const handleDeleteComment = async () => {
 
   try {
     await deleteComment(route.params.slug as string, props.comment.id);
+
     emit('delete-comment', props.comment.id);
   } catch (error) {
     errors.value = (error as any).errors;
@@ -83,12 +84,12 @@ const handleDeleteComment = async () => {
         >
           {{ comment.author.username }}
         </router-link>
-        <span class="text-[#bbbbbb]"
+        <span class="text-[#bbb]"
           >{{ formatDate(comment.createdAt) }} {{ formatTime }}</span
         >
       </div>
       <span
-        class="cursor-pointer text-base text-[#333333] opacity-60 duration-300 hover:opacity-100"
+        class="cursor-pointer text-base text-[#333] opacity-60 duration-300 hover:opacity-100"
         :class="isDeleting ? 'pointer-events-none' : 'pointer-events-auto'"
         @click="handleDeleteComment"
       >

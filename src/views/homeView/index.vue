@@ -8,7 +8,6 @@ export default {
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
-
 import ArticleListComponent from '@/components/ArticleListComponent.vue';
 import TagsComponent from '@/components/TagsComponent.vue';
 
@@ -37,7 +36,7 @@ const { isLoggedIn } = storeToRefs(userStore);
                 :class="
                   route.name === 'my-feed'
                     ? 'border-primary text-primary'
-                    : 'border-transparent text-[#aaaaaa]'
+                    : 'border-transparent text-[#aaa]'
                 "
               >
                 Your Feed
@@ -50,7 +49,7 @@ const { isLoggedIn } = storeToRefs(userStore);
                 :class="
                   route.name === 'global-feed'
                     ? 'border-primary text-primary'
-                    : 'border-transparent text-[#aaaaaa]'
+                    : 'border-transparent text-[#aaa]'
                 "
               >
                 Global Feed
@@ -66,7 +65,7 @@ const { isLoggedIn } = storeToRefs(userStore);
                 :class="
                   route.name === 'tag'
                     ? 'border-primary text-primary'
-                    : 'border-transparent text-[#aaaaaa]'
+                    : 'border-transparent text-[#aaa]'
                 "
               >
                 <i class="ion-pound"></i>

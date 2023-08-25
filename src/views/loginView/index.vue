@@ -32,6 +32,7 @@ const handleLogin = async () => {
   try {
     const res = await login({ user: user.value });
     setUser(res.user);
+    
     router.push({ name: 'global-feed' });
   } catch (error) {
     errors.value = (error as any).errors;

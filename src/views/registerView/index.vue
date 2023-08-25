@@ -7,9 +7,9 @@ export default {
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/user';
 import type { User } from '@/types';
 import type { ErrorObject } from '@/types/error';
-import { useUserStore } from '@/stores/user';
 import { register } from '@/api';
 
 const router = useRouter();
@@ -33,6 +33,7 @@ const handleRegister = async () => {
   try {
     const res = await register({ user: user.value });
     setUser(res.user);
+
     router.push({ name: 'global-feed' });
   } catch (error) {
     errors.value = (error as any).errors;

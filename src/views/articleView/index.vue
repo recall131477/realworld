@@ -358,7 +358,7 @@ onMounted(async () => {
       </circle>
     </svg>
   </div>
-  <div class="bg-[#333333] py-8 text-white">
+  <div class="bg-[#333] py-8 text-white">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <h1 class="mb-8 text-[44px] font-semibold leading-none">
         {{ article.title }}
@@ -379,7 +379,7 @@ onMounted(async () => {
         <li v-for="tag in article.tagList" :key="tag">
           <router-link
             :to="{ name: 'tag', params: { tag: tag } }"
-            class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+            class="rounded-full border border-[#ddd] px-2 text-sm font-light text-[#aaa]"
             >{{ tag }}</router-link
           >
         </li>
@@ -424,18 +424,3 @@ onMounted(async () => {
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 0.625rem;
-  width: 0.625rem;
-  height: 0.625rem;
-  border-radius: 50%;
-  animation: mulShdSpin 1.1s infinite ease;
-}
-</style>

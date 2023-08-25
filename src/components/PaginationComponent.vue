@@ -86,7 +86,7 @@ const changePage = (page: string | number) => {
         href="javascript:;"
         class="-ml-[1px] block border px-3 py-2 duration-300 hover:bg-[#eceeef]"
         :class="{
-          'border-[#dddddd] bg-white text-primary': currentPage !== page,
+          'border-[#ddd] bg-white text-primary': currentPage !== page,
           'border-primary bg-primary text-white': currentPage === page,
         }"
         @click="changePage(page)"

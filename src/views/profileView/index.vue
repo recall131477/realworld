@@ -96,19 +96,19 @@ watch(
           />
           <div class="mt-4 text-center">
             <h1 class="text-2xl font-bold">{{ profile.username }}</h1>
-            <p class="mt-1 font-light text-[#aaaaaa]">{{ profile.bio }}</p>
+            <p class="mt-1 font-light text-[#aaa]">{{ profile.bio }}</p>
           </div>
           <div class="mt-2 text-right">
             <router-link
               :to="{ name: 'settings' }"
-              class="inline-block rounded border border-[#999999] px-2 py-1 text-sm leading-tight text-[#999999] duration-300 hover:bg-[#cccccc]"
+              class="inline-block rounded border border-[#999] px-2 py-1 text-sm leading-tight text-[#999] duration-300 hover:bg-[#ccc]"
               v-if="isCurrentUser"
             >
               <i class="ion-gear-a"></i> Edit Profile Settings
             </router-link>
             <button
               type="button"
-              class="inline-block rounded border border-[#999999] px-2 py-1 text-sm leading-tight text-[#999999] hover:bg-[#cccccc] disabled:pointer-events-none disabled:opacity-60"
+              class="inline-block rounded border border-[#999] px-2 py-1 text-sm leading-tight text-[#999] hover:bg-[#ccc] disabled:pointer-events-none disabled:opacity-60"
               :class="{ 'bg-white text-[#373a3c]': profile.following }"
               :disabled="isFollowing"
               @click="toggleFollow"
@@ -134,7 +134,7 @@ watch(
               :class="
                 route.name === 'profile'
                   ? 'border-primary text-primary'
-                  : 'border-transparent text-[#aaaaaa]'
+                  : 'border-transparent text-[#aaa]'
               "
               >My Articles
             </router-link>
@@ -146,7 +146,7 @@ watch(
               :class="
                 route.name === 'profile-favorites'
                   ? 'border-primary text-primary'
-                  : 'border-transparent text-[#aaaaaa]'
+                  : 'border-transparent text-[#aaa]'
               "
               >Favorited Articles</router-link
             >

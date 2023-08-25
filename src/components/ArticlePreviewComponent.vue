@@ -79,14 +79,14 @@ const toggleFavorite = async () => {
             class="block font-medium text-primary"
             >{{ article.author.username }}</router-link
           >
-          <span class="block text-xs text-[#bbbbbb]">{{
+          <span class="block text-xs text-[#bbb]">{{
             formatDate(article.createdAt)
           }}</span>
         </div>
       </div>
       <button
         type="button"
-        class="iinline-block rounded border border-primary px-2 py-1 text-sm leading-tight duration-300 hover:bg-primary hover:text-white disabled:pointer-events-none disabled:opacity-60"
+        class="inline-block rounded border border-primary px-2 py-1 text-sm leading-tight duration-300 hover:bg-primary hover:text-white disabled:pointer-events-none disabled:opacity-60"
         :class="article.favorited ? 'bg-primary text-white' : 'text-primary'"
         :disabled="isFavoriting"
         @click="toggleFavorite"
@@ -106,14 +106,14 @@ const toggleFavorite = async () => {
       <h2 class="text-2xl font-semibold leading-[1.1]">
         {{ article.title }}
       </h2>
-      <p class="mt-1 font-light text-[#999999]">
+      <p class="mt-1 font-light text-[#999]">
         {{ article.description }}
       </p>
       <div class="mt-4 flex justify-between gap-x-4">
-        <span class="text-sm font-light text-[#bbbbbb]">Read more...</span>
+        <span class="text-sm font-light text-[#bbb]">Read more...</span>
         <ul class="flex flex-wrap gap-1">
           <li
-            class="rounded-full border border-[#dddddd] px-2 text-sm font-light text-[#aaaaaa]"
+            class="rounded-full border border-[#ddd] px-2 text-sm font-light text-[#aaa]"
             v-for="tag in article.tagList"
             :key="tag"
           >

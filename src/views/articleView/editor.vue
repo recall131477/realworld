@@ -116,7 +116,7 @@ watch(
                   id="title"
                   name="title"
                   autocomplete="title"
-                  class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999999] disabled:pointer-events-none disabled:bg-[#eceeef]"
+                  class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999] disabled:pointer-events-none disabled:bg-[#eceeef]"
                   placeholder="Article Title"
                   v-model="article.title"
                 />
@@ -126,7 +126,7 @@ watch(
                   type="text"
                   id="about"
                   name="about"
-                  class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999999] disabled:pointer-events-none disabled:bg-[#eceeef]"
+                  class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999] disabled:pointer-events-none disabled:bg-[#eceeef]"
                   placeholder="What's this article about?"
                   v-model="article.description"
                 />
@@ -144,7 +144,7 @@ watch(
                   type="text"
                   id="tags"
                   name="tags"
-                  class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999999] disabled:pointer-events-none disabled:bg-[#eceeef]"
+                  class="border-black/15 block w-full rounded border bg-white px-6 py-3 text-xl leading-tight text-[#55595c] outline-none placeholder:text-[#999] disabled:pointer-events-none disabled:bg-[#eceeef]"
                   placeholder="Enter tags"
                   v-model="tag"
                   @keypress.enter.prevent="addArticleTag"

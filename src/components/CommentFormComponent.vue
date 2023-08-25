@@ -39,6 +39,7 @@ const handleCreateComment = async () => {
         body: content.value,
       },
     });
+
     emit('create-comment', res.comment);
     content.value = '';
   } catch (error) {
