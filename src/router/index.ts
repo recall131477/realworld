@@ -2,6 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 
 const routes = [
+  /** 404 */
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'page-not-found',
+    component: () => import('../views/pageNotFoundView/index.vue'),
+    meta: {
+      title: 'page not found',
+    },
+  },
   /** 不需要身分驗證 */
   {
     path: '/',
