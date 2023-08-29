@@ -69,11 +69,6 @@ const handleUpdateUser = async () => {
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="md:mx-auto md:w-1/2">
         <h1 class="text-center text-[40px]">Your Settings</h1>
-        <ul class="mb-4 list-disc pl-10 font-bold text-danger" v-if="errors">
-          <li v-for="(error, field) in errors" :key="field">
-            {{ field }} {{ error ? error[0] : '' }}
-          </li>
-        </ul>
         <form @submit.prevent="handleUpdateUser">
           <fieldset class="space-y-4" :disabled="isLoading">
             <fieldset class="form-group">

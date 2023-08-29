@@ -11,6 +11,7 @@ import type { User } from '@/types';
 import type { ErrorObject } from '@/types/error';
 import { useUserStore } from '@/stores/user';
 import { login } from '@/api';
+import ErrorMessageComponent from '@/components/ErrorMessageComponent.vue';
 
 const router = useRouter();
 
@@ -32,7 +33,7 @@ const handleLogin = async () => {
   try {
     const res = await login({ user: user.value });
     setUser(res.user);
-    
+
     router.push({ name: 'global-feed' });
   } catch (error) {
     errors.value = (error as any).errors;
@@ -52,11 +53,7 @@ const handleLogin = async () => {
             >Need an account?</router-link
           >
         </div>
-        <ul class="mb-4 list-disc pl-10 font-bold text-danger" v-if="errors">
-          <li v-for="(error, field) in errors" :key="field">
-            {{ field }} {{ error ? error[0] : '' }}
-          </li>
-        </ul>
+        <error-message-component :errors="errors" />
         <form @submit.prevent="handleLogin">
           <fieldset class="space-y-4" :disabled="isLoading">
             <fieldset>

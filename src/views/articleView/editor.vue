@@ -11,6 +11,7 @@ import type { CreateArticle } from '@/types';
 import type { ErrorObject } from '@/types/error';
 import { getArticle, createArticle, updateArticle } from '@/api';
 import LoadingComponent from '@/components/LoadingComponent.vue';
+import ErrorMessageComponent from '@/components/ErrorMessageComponent.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -103,11 +104,7 @@ watch(
   <div class="pt-6">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="md:mx-auto md:w-10/12">
-        <ul class="mb-4 list-disc pl-10 font-bold text-danger" v-if="errors">
-          <li v-for="(error, field) in errors" :key="field">
-            {{ field }} {{ error ? error[0] : '' }}
-          </li>
-        </ul>
+        <error-message-component :errors="errors" />
         <form @submit.prevent="handleArticle">
           <fieldset class="space-y-4" :disabled="isEditing">
             <fieldset>
