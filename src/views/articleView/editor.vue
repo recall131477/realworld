@@ -100,7 +100,7 @@ watch(
 </script>
 
 <template>
-  <LoadingComponent :isLoading="isLoading" />
+  <loading-component :isLoading="isLoading" />
   <div class="pt-6">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="md:mx-auto md:w-10/12">

@@ -14,9 +14,9 @@ watch(route, (to) => {
 </script>
 
 <template>
-  <HeaderLayout />
+  <header-layout />
   <main class="min-h-[calc(100vh-3.5rem)] py-14">
     <router-view />
   </main>
-  <FooterLayout />
+  <footer-layout />
 </template>

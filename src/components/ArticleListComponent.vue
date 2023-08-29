@@ -112,13 +112,13 @@ watch(
     <template v-else>
       <ul>
         <li v-for="article in articles" :key="article.slug">
-          <ArticlePreviewComponent
+          <article-preview-component
             :article="article"
             @update-article-favorite="updateArticleFavorite"
           />
         </li>
       </ul>
-      <PaginationComponent
+      <pagination-component
         :articles-count="articlesCount"
         :current-page="currentPage"
         @change-page="changePage"

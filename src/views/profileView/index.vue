@@ -152,7 +152,7 @@ watch(
             >
           </li>
         </ul>
-        <ArticleListComponent />
+        <article-list-component />
       </div>
     </div>
   </div>

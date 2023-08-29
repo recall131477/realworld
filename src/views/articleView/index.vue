@@ -104,13 +104,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <LoadingComponent :isLoading="isLoading" />
+  <loading-component :isLoading="isLoading" />
   <div class="bg-[#333] py-8 text-white">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <h1 class="mb-8 text-[44px] font-semibold leading-none">
         {{ article.title }}
       </h1>
-      <ArticleMetaComponent
+      <article-meta-component
         :article="article"
         @update-follow="updateArticleFollow"
         @update-favorite="updateArticleFavorite"
@@ -133,7 +133,7 @@ onMounted(async () => {
       </ul>
       <div class="mb-12 mt-8 border-t border-black/10 pt-6">
         <div class="flex justify-center">
-          <ArticleMetaComponent
+          <article-meta-component
             :article="article"
             @update-follow="updateArticleFollow"
             @update-favorite="updateArticleFavorite"
@@ -141,7 +141,7 @@ onMounted(async () => {
         </div>
       </div>
       <div class="space-y-3 md:mx-auto md:w-2/3">
-        <CommentFormComponent
+        <comment-form-component
           v-if="isLoggedIn"
           @create-comment="createComment"
         />
@@ -161,7 +161,7 @@ onMounted(async () => {
           </router-link>
           to add comments on this article.
         </p>
-        <CommentPreviewComponent
+        <comment-preview-component
           v-for="comment in sortedComment"
           :key="comment.id"
           :comment="comment"

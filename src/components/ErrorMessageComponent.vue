@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import type { ErrorObject } from '@/types/error';
+
 defineProps<{
   errors: ErrorObject;
 }>();

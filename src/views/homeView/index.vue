@@ -73,12 +73,12 @@ const { isLoggedIn } = storeToRefs(userStore);
               </router-link>
             </li>
           </ul>
-          <ArticleListComponent />
+          <article-list-component />
         </div>
         <div>
           <div class="rounded bg-[#f3f3f3] p-2.5">
             <span>Popular Tags</span>
-            <TagsComponent />
+            <tags-component />
           </div>
         </div>
       </div>
