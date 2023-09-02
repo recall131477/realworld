@@ -1,9 +1,8 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-
+import { useUserStore } from '@/stores/user';
 import App from './App.vue';
 import router from './router';
-import { useUserStore } from '@/stores/user';
 
 import '@/assets/scss/tailwind.scss';
 import '@/assets/scss/app.scss';

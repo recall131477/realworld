@@ -1,13 +1,7 @@
-<script lang="ts">
-export default {
-  name: 'TagsComponent',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import type { ErrorObject } from '@/types/error';
 import { getTags } from '@/api';
+import type { ErrorObject } from '@/types/error';
 
 const tags = ref<string[]>([]);
 
@@ -27,6 +21,12 @@ onMounted(async () => {
 
   isLoading.value = false;
 });
+</script>
+
+<script lang="ts">
+export default {
+  name: 'TagsComponent',
+};
 </script>
 
 <template>

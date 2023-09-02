@@ -6,7 +6,7 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'page-not-found',
-    component: () => import('../views/pageNotFoundView/index.vue'),
+    component: () => import('@/views/pageNotFoundView/index.vue'),
     meta: {
       title: 'page not found',
     },
@@ -15,12 +15,12 @@ const routes = [
   {
     path: '/',
     name: 'global-feed',
-    component: () => import('../views/homeView/index.vue'),
+    component: () => import('@/views/homeView/index.vue'),
   },
   {
     path: '/tag/:tag',
     name: 'tag',
-    component: () => import('../views/homeView/index.vue'),
+    component: () => import('@/views/homeView/index.vue'),
     meta: {
       title: 'tag',
     },
@@ -28,7 +28,7 @@ const routes = [
   {
     path: '/article/:slug',
     name: 'article',
-    component: () => import('../views/articleView/index.vue'),
+    component: () => import('@/views/articleView/index.vue'),
     meta: {
       title: 'article',
     },
@@ -36,7 +36,7 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: () => import('../views/registerView/index.vue'),
+    component: () => import('@/views/registerView/index.vue'),
     meta: {
       title: 'register',
       anonymousOnly: true,
@@ -45,7 +45,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/loginView/index.vue'),
+    component: () => import('@/views/loginView/index.vue'),
     meta: {
       title: 'login',
       anonymousOnly: true,
@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/my-feed',
     name: 'my-feed',
-    component: () => import('../views/homeView/index.vue'),
+    component: () => import('@/views/homeView/index.vue'),
     meta: {
       title: 'my feed',
       requiresAuth: true,
@@ -64,7 +64,7 @@ const routes = [
   {
     path: '/settings',
     name: 'settings',
-    component: () => import('../views/settingsView/index.vue'),
+    component: () => import('@/views/settingsView/index.vue'),
     meta: {
       title: 'settings',
       requiresAuth: true,
@@ -73,7 +73,7 @@ const routes = [
   {
     path: '/article/create',
     name: 'create-article',
-    component: () => import('../views/articleView/editor.vue'),
+    component: () => import('@/views/articleView/editor.vue'),
     meta: {
       title: 'create article',
       requiresAuth: true,
@@ -82,7 +82,7 @@ const routes = [
   {
     path: '/article/edit/:slug',
     name: 'edit-article',
-    component: () => import('../views/articleView/editor.vue'),
+    component: () => import('@/views/articleView/editor.vue'),
     meta: {
       title: 'edit article',
       requiresAuth: true,
@@ -91,7 +91,7 @@ const routes = [
   {
     path: '/profile/:username',
     name: 'profile',
-    component: () => import('../views/profileView/index.vue'),
+    component: () => import('@/views/profileView/index.vue'),
     meta: {
       title: 'profile',
       requiresAuth: true,
@@ -100,7 +100,7 @@ const routes = [
   {
     path: '/profile/:username/favorites',
     name: 'profile-favorites',
-    component: () => import('../views/profileView/index.vue'),
+    component: () => import('@/views/profileView/index.vue'),
     meta: {
       title: 'profile favorites',
       requiresAuth: true,

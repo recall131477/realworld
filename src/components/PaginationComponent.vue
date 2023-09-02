@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'PaginationComponent',
-};
-</script>
-
 <script setup lang="ts">
 import { computed } from 'vue';
 
@@ -18,9 +12,8 @@ const emit = defineEmits<{
 
 const totalPage = computed(() => Math.ceil(props.articlesCount / 10));
 const calculatePage = computed(() => {
-  const getRange = (start: number, end: number): number[] => {
-    return Array.from({ length: end - start + 1 }, (_, i) => i + start);
-  };
+  const getRange = (start: number, end: number): number[] =>
+    Array.from({ length: end - start + 1 }, (_, i) => i + start);
 
   const pagination = (): (string | number)[] => {
     let delta: number;
@@ -75,6 +68,12 @@ const changePage = (page: string | number) => {
   if (page === '...') return;
 
   emit('change-page', page as number);
+};
+</script>
+
+<script lang="ts">
+export default {
+  name: 'PaginationComponent',
 };
 </script>
 

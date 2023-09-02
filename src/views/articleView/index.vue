@@ -1,21 +1,15 @@
-<script lang="ts">
-export default {
-  name: 'ArticleView',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
-import { Article, Comment } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { getArticle, getComments } from '@/api';
 import LoadingComponent from '@/components/LoadingComponent.vue';
 import ArticleMetaComponent from '@/components/ArticleMetaComponent.vue';
 import CommentFormComponent from '@/components/CommentFormComponent.vue';
 import CommentPreviewComponent from '@/components/CommentPreviewComponent.vue';
+import { Article, Comment } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const route = useRoute();
 
@@ -45,14 +39,14 @@ const isLoading = ref(false);
 
 const errors = ref<ErrorObject>({});
 
-const sortedComment = computed(() => {
-  return comments.value
+const sortedComment = computed(() =>
+  comments.value
     .slice()
     .sort(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
-});
+    )
+);
 
 const fetchArticle = async () => {
   try {
@@ -101,6 +95,12 @@ onMounted(async () => {
 
   isLoading.value = false;
 });
+</script>
+
+<script lang="ts">
+export default {
+  name: 'ArticleView',
+};
 </script>
 
 <template>

@@ -1,8 +1,8 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
-import type { UserInfo } from '@/types';
 import { storage } from '@/utils/storage';
 import { getUser } from '@/api';
+import type { UserInfo } from '@/types';
 
 const userStorage = storage('user');
 

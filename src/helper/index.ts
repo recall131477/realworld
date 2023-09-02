@@ -6,10 +6,9 @@ export const pageToOffset = (page: number = 1, limit: number = 10) => {
   };
 };
 
-export const formatDate = (data: string): string => {
-  return new Date(data).toLocaleDateString('en-US', {
+export const formatDate = (data: string): string =>
+  new Date(data).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
   });
-};

@@ -1,17 +1,11 @@
-<script lang="ts">
-export default {
-  name: 'EditorArticleView',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import type { CreateArticle } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { getArticle, createArticle, updateArticle } from '@/api';
 import LoadingComponent from '@/components/LoadingComponent.vue';
 import ErrorMessageComponent from '@/components/ErrorMessageComponent.vue';
+import type { CreateArticle } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const route = useRoute();
 const router = useRouter();
@@ -97,6 +91,12 @@ watch(
     }
   }
 );
+</script>
+
+<script lang="ts">
+export default {
+  name: 'EditorArticleView',
+};
 </script>
 
 <template>

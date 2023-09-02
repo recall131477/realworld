@@ -1,17 +1,11 @@
-<script lang="ts">
-export default {
-  name: 'RegisterView',
-};
-</script>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
-import type { User } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { register } from '@/api';
 import ErrorMessageComponent from '@/components/ErrorMessageComponent.vue';
+import type { User } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const router = useRouter();
 
@@ -41,6 +35,12 @@ const handleRegister = async () => {
   }
 
   isLoading.value = false;
+};
+</script>
+
+<script lang="ts">
+export default {
+  name: 'RegisterView',
 };
 </script>
 

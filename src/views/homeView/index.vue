@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'HomeView',
-};
-</script>
-
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
@@ -15,6 +9,12 @@ const route = useRoute();
 
 const userStore = useUserStore();
 const { isLoggedIn } = storeToRefs(userStore);
+</script>
+
+<script lang="ts">
+export default {
+  name: 'HomeView',
+};
 </script>
 
 <template>

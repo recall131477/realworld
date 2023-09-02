@@ -1,18 +1,12 @@
-<script lang="ts">
-export default {
-  name: 'ArticleListComponent',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import { useRoute, RouteLocationNormalized } from 'vue-router';
-import type { Article, ArticleType, ArticleConfig } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { pageToOffset } from '@/helper';
 import { getArticles } from '@/api';
 import ArticlePreviewComponent from '@/components/ArticlePreviewComponent.vue';
 import PaginationComponent from '@/components/PaginationComponent.vue';
+import type { Article, ArticleType, ArticleConfig } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const route = useRoute();
 
@@ -54,17 +48,20 @@ const setArticleParams = (
   switch (route.name) {
     case 'tag':
       if (typeof route.params.tag === 'string') {
-        config.params.tag = route.params.tag;
+        const newConfig = { ...config };
+        newConfig.params.tag = route.params.tag;
       }
       break;
     case 'profile':
       if (typeof route.params.username === 'string') {
-        config.params.author = route.params.username;
+        const newConfig = { ...config };
+        newConfig.params.author = route.params.username;
       }
       break;
     case 'profile-favorites':
       if (typeof route.params.username === 'string') {
-        config.params.favorited = route.params.username;
+        const newConfig = { ...config };
+        newConfig.params.favorited = route.params.username;
       }
       break;
     default:
@@ -99,6 +96,12 @@ watch(
   },
   { immediate: true }
 );
+</script>
+
+<script lang="ts">
+export default {
+  name: 'ArticleListComponent',
+};
 </script>
 
 <template>

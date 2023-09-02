@@ -1,18 +1,12 @@
-<script lang="ts">
-export default {
-  name: 'ProfileView',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
-import type { Author } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { getProfile, followProfile, unfollowProfile } from '@/api';
 import ArticleListComponent from '@/components/ArticleListComponent.vue';
+import type { Author } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const route = useRoute();
 const router = useRouter();
@@ -32,9 +26,9 @@ const isFollowing = ref(false);
 
 const errors = ref<ErrorObject>({});
 
-const isCurrentUser = computed(() => {
-  return isLoggedIn && userInfo.value?.username === profile.value.username;
-});
+const isCurrentUser = computed(
+  () => isLoggedIn && userInfo.value?.username === profile.value.username
+);
 
 const fetchProfile = async () => {
   isLoading.value = true;
@@ -81,6 +75,12 @@ watch(
   },
   { immediate: true }
 );
+</script>
+
+<script lang="ts">
+export default {
+  name: 'ProfileView',
+};
 </script>
 
 <template>

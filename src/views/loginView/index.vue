@@ -1,17 +1,11 @@
-<script lang="ts">
-export default {
-  name: 'LoginView',
-};
-</script>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import type { User } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { useUserStore } from '@/stores/user';
 import { login } from '@/api';
 import ErrorMessageComponent from '@/components/ErrorMessageComponent.vue';
+import type { User } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const router = useRouter();
 
@@ -40,6 +34,12 @@ const handleLogin = async () => {
   }
 
   isLoading.value = false;
+};
+</script>
+
+<script lang="ts">
+export default {
+  name: 'LoginView',
 };
 </script>
 

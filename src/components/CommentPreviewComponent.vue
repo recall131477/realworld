@@ -1,16 +1,10 @@
-<script lang="ts">
-export default {
-  name: 'CommentPreviewComponent',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import type { Comment } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { formatDate } from '@/helper';
 import { deleteComment } from '@/api';
+import type { Comment } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const props = defineProps<{
   comment: Comment;
@@ -45,6 +39,12 @@ const handleDeleteComment = async () => {
   }
 
   isDeleting.value = false;
+};
+</script>
+
+<script lang="ts">
+export default {
+  name: 'CommentPreviewComponent',
 };
 </script>
 

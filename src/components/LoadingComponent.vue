@@ -1,13 +1,13 @@
-<script lang="ts">
-export default {
-  name: 'LoadingComponent',
-};
-</script>
-
 <script setup lang="ts">
 defineProps<{
   isLoading: boolean;
 }>();
+</script>
+
+<script lang="ts">
+export default {
+  name: 'LoadingComponent',
+};
 </script>
 
 <template>

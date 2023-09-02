@@ -1,17 +1,11 @@
-<script lang="ts">
-export default {
-  name: 'CommentFormComponent',
-};
-</script>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
+import { createComment } from '@/api';
 import type { Comment } from '@/types';
 import type { ErrorObject } from '@/types/error';
-import { createComment } from '@/api';
 
 const emit = defineEmits<{
   (event: 'create-comment', comment: Comment): void;
@@ -47,6 +41,12 @@ const handleCreateComment = async () => {
   }
 
   isLoading.value = false;
+};
+</script>
+
+<script lang="ts">
+export default {
+  name: 'CommentFormComponent',
 };
 </script>
 

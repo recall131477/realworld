@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: 'HeaderLayoutComponent',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
@@ -25,6 +19,12 @@ const logout = () => {
 watch(route, () => {
   isMenuOpen.value = false;
 });
+</script>
+
+<script lang="ts">
+export default {
+  name: 'HeaderLayoutComponent',
+};
 </script>
 
 <template>

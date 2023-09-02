@@ -1,18 +1,12 @@
-<script lang="ts">
-export default {
-  name: 'ArticlePreviewComponent',
-};
-</script>
-
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
-import type { Article } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { formatDate } from '@/helper';
 import { favoriteArticle, unfavoriteArticle } from '@/api';
+import type { Article } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const props = defineProps<{
   article: Article;
@@ -51,6 +45,12 @@ const toggleFavorite = async () => {
   }
 
   isFavoriting.value = false;
+};
+</script>
+
+<script lang="ts">
+export default {
+  name: 'ArticlePreviewComponent',
 };
 </script>
 

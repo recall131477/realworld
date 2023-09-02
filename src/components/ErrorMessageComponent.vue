@@ -1,15 +1,15 @@
-<script lang="ts">
-export default {
-  name: 'ErrorMessageComponent',
-};
-</script>
-
 <script setup lang="ts">
 import type { ErrorObject } from '@/types/error';
 
 defineProps<{
   errors: ErrorObject;
 }>();
+</script>
+
+<script lang="ts">
+export default {
+  name: 'ErrorMessageComponent',
+};
 </script>
 
 <template>

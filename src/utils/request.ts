@@ -10,7 +10,8 @@ instance.interceptors.request.use(
     const userStorage = storage('user');
     const token = userStorage.get();
     if (token) {
-      config.headers.Authorization = `Token ${token}`;
+      const newConfig = { ...config };
+      newConfig.headers.Authorization = `Token ${token}`;
     }
     return config;
   },

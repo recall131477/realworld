@@ -1,17 +1,11 @@
-<script lang="ts">
-export default {
-  name: 'SettingsView',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
+import { updateUser } from '@/api';
 import type { UserInfo } from '@/types';
 import type { ErrorObject } from '@/types/error';
-import { updateUser } from '@/api';
 
 const router = useRouter();
 
@@ -61,6 +55,12 @@ const handleUpdateUser = async () => {
   }
 
   isLoading.value = false;
+};
+</script>
+
+<script lang="ts">
+export default {
+  name: 'SettingsView',
 };
 </script>
 

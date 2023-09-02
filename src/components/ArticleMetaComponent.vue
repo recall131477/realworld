@@ -1,16 +1,8 @@
-<script lang="ts">
-export default {
-  name: 'ArticleMetaComponent',
-};
-</script>
-
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
-import { Article } from '@/types';
-import type { ErrorObject } from '@/types/error';
 import { formatDate } from '@/helper';
 import {
   deleteArticle,
@@ -19,6 +11,8 @@ import {
   favoriteArticle,
   unfavoriteArticle,
 } from '@/api';
+import { Article } from '@/types';
+import type { ErrorObject } from '@/types/error';
 
 const props = defineProps<{
   article: Article;
@@ -42,11 +36,10 @@ const isFavoriting = ref(false);
 
 const errors = ref<ErrorObject>({});
 
-const isCurrentUser = computed(() => {
-  return (
+const isCurrentUser = computed(
+  () =>
     isLoggedIn && userInfo.value?.username === tempArticle.value.author.username
-  );
-});
+);
 
 const toggleFollow = async () => {
   if (!isLoggedIn.value) {
@@ -114,6 +107,12 @@ watch(
 );
 </script>
 
+<script lang="ts">
+export default {
+  name: 'ArticleMetaComponent',
+};
+</script>
+
 <template>
   <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
     <div class="flex items-center gap-x-2">
@@ -148,7 +147,7 @@ watch(
         }}</span>
       </div>
     </div>
-    <div class="flex flex-wrap gap-x-2 gap-y-2">
+    <div class="flex flex-wrap gap-2">
       <template v-if="isCurrentUser">
         <router-link
           :to="{
