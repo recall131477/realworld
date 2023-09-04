@@ -4,7 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
 import { getProfile, followProfile, unfollowProfile } from '@/api';
-import ArticleListComponent from '@/components/ArticleListComponent.vue';
+import ArticleList from '@/components/ArticleList.vue';
 import type { Author } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -152,7 +152,7 @@ export default {
             >
           </li>
         </ul>
-        <article-list-component />
+        <article-list />
       </div>
     </div>
   </div>

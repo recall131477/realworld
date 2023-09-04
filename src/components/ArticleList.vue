@@ -3,8 +3,8 @@ import { ref, onMounted, watch } from 'vue';
 import { useRoute, RouteLocationNormalized } from 'vue-router';
 import { pageToOffset } from '@/helper';
 import { getArticles } from '@/api';
-import ArticlePreviewComponent from '@/components/ArticlePreviewComponent.vue';
-import PaginationComponent from '@/components/PaginationComponent.vue';
+import ArticlePreview from '@/components/ArticlePreview.vue';
+import Pagination from '@/components/Pagination.vue';
 import type { Article, ArticleType, ArticleConfig } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -115,13 +115,13 @@ export default {
     <template v-else>
       <ul>
         <li v-for="article in articles" :key="article.slug">
-          <article-preview-component
+          <article-preview
             :article="article"
             @update-article-favorite="updateArticleFavorite"
           />
         </li>
       </ul>
-      <pagination-component
+      <pagination
         :articles-count="articlesCount"
         :current-page="currentPage"
         @change-page="changePage"

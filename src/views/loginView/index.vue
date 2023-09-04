@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 import { login } from '@/api';
-import ErrorMessageComponent from '@/components/ErrorMessageComponent.vue';
+import ErrorMessage from '@/components/ErrorMessage.vue';
 import type { User } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -53,7 +53,7 @@ export default {
             >Need an account?</router-link
           >
         </div>
-        <error-message-component :errors="errors" />
+        <error-message :errors="errors" />
         <form @submit.prevent="handleLogin">
           <fieldset class="space-y-4" :disabled="isLoading">
             <fieldset>

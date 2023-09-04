@@ -4,10 +4,10 @@ import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
 import { getArticle, getComments } from '@/api';
-import LoadingComponent from '@/components/LoadingComponent.vue';
-import ArticleMetaComponent from '@/components/ArticleMetaComponent.vue';
-import CommentFormComponent from '@/components/CommentFormComponent.vue';
-import CommentPreviewComponent from '@/components/CommentPreviewComponent.vue';
+import Loading from '@/components/Loading.vue';
+import ArticleMeta from '@/components/ArticleMeta.vue';
+import CommentForm from '@/components/CommentForm.vue';
+import CommentPreview from '@/components/CommentPreview.vue';
 import { Article, Comment } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -104,13 +104,13 @@ export default {
 </script>
 
 <template>
-  <loading-component :isLoading="isLoading" />
+  <loading :isLoading="isLoading" />
   <div class="bg-[#333] py-8 text-white">
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <h1 class="mb-8 text-[44px] font-semibold leading-none">
         {{ article.title }}
       </h1>
-      <article-meta-component
+      <article-meta
         :article="article"
         @update-follow="updateArticleFollow"
         @update-favorite="updateArticleFavorite"
@@ -133,7 +133,7 @@ export default {
       </ul>
       <div class="mb-12 mt-8 border-t border-black/10 pt-6">
         <div class="flex justify-center">
-          <article-meta-component
+          <article-meta
             :article="article"
             @update-follow="updateArticleFollow"
             @update-favorite="updateArticleFavorite"
@@ -141,10 +141,7 @@ export default {
         </div>
       </div>
       <div class="space-y-3 md:mx-auto md:w-2/3">
-        <comment-form-component
-          v-if="isLoggedIn"
-          @create-comment="createComment"
-        />
+        <comment-form v-if="isLoggedIn" @create-comment="createComment" />
         <p v-else>
           <router-link
             :to="{ name: 'login' }"
@@ -161,7 +158,7 @@ export default {
           </router-link>
           to add comments on this article.
         </p>
-        <comment-preview-component
+        <comment-preview
           v-for="comment in sortedComment"
           :key="comment.id"
           :comment="comment"

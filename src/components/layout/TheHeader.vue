@@ -23,7 +23,7 @@ watch(route, () => {
 
 <script lang="ts">
 export default {
-  name: 'TheHeader',
+  name: 'TheHeaderComponent',
 };
 </script>
 

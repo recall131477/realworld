@@ -2,8 +2,8 @@
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
-import ArticleListComponent from '@/components/ArticleListComponent.vue';
-import TagsComponent from '@/components/TagsComponent.vue';
+import ArticleList from '@/components/ArticleList.vue';
+import Tags from '@/components/Tags.vue';
 
 const route = useRoute();
 
@@ -73,12 +73,12 @@ export default {
               </router-link>
             </li>
           </ul>
-          <article-list-component />
+          <article-list />
         </div>
         <div>
           <div class="rounded bg-[#f3f3f3] p-2.5">
             <span>Popular Tags</span>
-            <tags-component />
+            <tags />
           </div>
         </div>
       </div>
