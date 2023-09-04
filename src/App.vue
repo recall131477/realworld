@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { watch } from 'vue';
 import { useRoute } from 'vue-router';
-import HeaderLayout from '@/components/layout/headerLayout/index.vue';
-import FooterLayout from '@/components/layout/footerLayout/index.vue';
+import TheHeader from '@/components/layout/TheHeader.vue';
+import TheFooter from '@/components/layout/TheFooter.vue';
 
 const route = useRoute();
 
@@ -14,9 +14,9 @@ watch(route, (to) => {
 </script>
 
 <template>
-  <header-layout />
+  <the-header />
   <main class="min-h-[calc(100vh-3.5rem)] py-14">
     <router-view />
   </main>
-  <footer-layout />
+  <the-footer />
 </template>
