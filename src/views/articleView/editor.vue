@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { getArticle, createArticle, updateArticle } from '@/api';
 import Loading from '@/components/Loading.vue';
 import ErrorMessage from '@/components/ErrorMessage.vue';
+import debounce from 'lodash.debounce';
 import type { CreateArticle } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -59,6 +60,10 @@ const handleArticle = async () => {
   isEditing.value = false;
 };
 
+const debounceHandleArticle = debounce(() => {
+  handleArticle();
+}, 250);
+
 const addArticleTag = () => {
   if (tag.value === '') return;
 
@@ -105,7 +110,7 @@ export default {
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="md:mx-auto md:w-10/12">
         <error-message :errors="errors" />
-        <form @submit.prevent="handleArticle">
+        <form @submit.prevent="debounceHandleArticle">
           <fieldset class="space-y-4" :disabled="isEditing">
             <fieldset>
               <input

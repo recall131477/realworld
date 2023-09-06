@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/user';
 import { register } from '@/api';
 import ErrorMessage from '@/components/ErrorMessage.vue';
+import debounce from 'lodash.debounce';
 import type { User } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -36,6 +37,10 @@ const handleRegister = async () => {
 
   isLoading.value = false;
 };
+
+const debounceHandleRegister = debounce(() => {
+  handleRegister();
+}, 250);
 </script>
 
 <script lang="ts">
@@ -55,7 +60,7 @@ export default {
           >
         </div>
         <error-message :errors="errors" />
-        <form @submit.prevent="handleRegister">
+        <form @submit.prevent="debounceHandleRegister">
           <fieldset class="space-y-4" :disabled="isLoading">
             <fieldset>
               <input

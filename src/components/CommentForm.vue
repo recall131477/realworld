@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
 import { createComment } from '@/api';
+import debounce from 'lodash.debounce';
 import type { Comment } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -42,6 +43,10 @@ const handleCreateComment = async () => {
 
   isLoading.value = false;
 };
+
+const debounceHandleCreateComment = debounce(() => {
+  handleCreateComment();
+}, 250);
 </script>
 
 <script lang="ts">
@@ -53,7 +58,7 @@ export default {
 <template>
   <form
     class="rounded border border-[#e5e5e5]"
-    @submit.prevent="handleCreateComment"
+    @submit.prevent="debounceHandleCreateComment"
   >
     <textarea
       class="block w-full resize-none rounded bg-white p-5 leading-tight text-[#55595c] outline-none disabled:pointer-events-none disabled:bg-[#eceeef]"

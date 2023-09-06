@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
 import { updateUser } from '@/api';
+import debounce from 'lodash.debounce';
 import type { UserInfo } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -25,18 +26,6 @@ const isLoading = ref(false);
 
 const errors = ref<ErrorObject>({});
 
-onMounted(() => {
-  if (userInfo.value) {
-    user.value = {
-      email: userInfo.value.email,
-      password: '',
-      username: userInfo.value.username,
-      bio: userInfo.value.bio,
-      image: userInfo.value.image,
-    };
-  }
-});
-
 const handleUpdateUser = async () => {
   isLoading.value = true;
 
@@ -56,6 +45,22 @@ const handleUpdateUser = async () => {
 
   isLoading.value = false;
 };
+
+const debounceHandleUpdateUser = debounce(() => {
+  handleUpdateUser();
+}, 250);
+
+onMounted(() => {
+  if (userInfo.value) {
+    user.value = {
+      email: userInfo.value.email,
+      password: '',
+      username: userInfo.value.username,
+      bio: userInfo.value.bio,
+      image: userInfo.value.image,
+    };
+  }
+});
 </script>
 
 <script lang="ts">
@@ -69,7 +74,7 @@ export default {
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="md:mx-auto md:w-1/2">
         <h1 class="text-center text-[40px]">Your Settings</h1>
-        <form @submit.prevent="handleUpdateUser">
+        <form @submit.prevent="debounceHandleUpdateUser">
           <fieldset class="space-y-4" :disabled="isLoading">
             <fieldset class="form-group">
               <input
