@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
   extends: [
     'eslint:recommended',
@@ -12,30 +13,19 @@ module.exports = {
     'airbnb-typescript/base',
     'prettier',
   ],
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: ['.eslintrc.{js,cjs}'],
-      parserOptions: {
-        sourceType: 'script',
-      },
-    },
-  ],
   parser: 'vue-eslint-parser',
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    project: ['./tsconfig.json', './tailwind.config.js'],
     extraFileExtensions: ['.vue'],
   },
   settings: {
     'import/resolver': {
       alias: {
         map: [['@', './src']],
-        extensions: ['.ts', '.tsx', '.vue'],
+        extensions: ['.ts', '.vue'],
       },
     },
     'import/core-modules': ['vite', '@vitejs/plugin-vue', 'vite-plugin-eslint'],
@@ -50,14 +40,12 @@ module.exports = {
       'ignorePackages',
       {
         '': 'never',
-        js: 'never',
-        jsx: 'never',
         ts: 'never',
-        tsx: 'never',
       },
     ],
     'import/no-unresolved': 'off',
     'consistent-return': 'off',
+    '@typescript-eslint/ban-types': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-unused-expressions': 'off',
     '@typescript-eslint/comma-dangle': 'off',
