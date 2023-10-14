@@ -14,7 +14,7 @@ onMounted(async () => {
 
   try {
     const res = await getTags();
-    tags.value = res.tags;
+    tags.value = res.data.tags;
   } catch (error) {
     errors.value = (error as any).errors;
   }

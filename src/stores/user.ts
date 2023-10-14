@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', () => {
   const verifyAuth = async () => {
     if (!userInfo.value && userStorage.get()) {
       const res = await getUser();
-      setUser(res.user);
+      setUser(res.data.user);
     }
   };
 

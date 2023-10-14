@@ -51,7 +51,7 @@ const sortedComment = computed(() =>
 const fetchArticle = async () => {
   try {
     const res = await getArticle(route.params.slug as string);
-    article.value = res.article;
+    article.value = res.data.article;
   } catch (error) {
     errors.value = (error as any).errors;
   }
@@ -60,7 +60,7 @@ const fetchArticle = async () => {
 const fetchComments = async () => {
   try {
     const res = await getComments(route.params.slug as string);
-    comments.value = res.comments;
+    comments.value = res.data.comments;
   } catch (error) {
     errors.value = (error as any).errors;
   }

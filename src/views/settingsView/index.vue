@@ -31,12 +31,12 @@ const handleUpdateUser = async () => {
 
   try {
     const res = await updateUser({ user: user.value });
-    setUser(res.user);
+    setUser(res.data.user);
 
     router.push({
       name: 'profile',
       params: {
-        username: res.user.username,
+        username: res.data.user.username,
       },
     });
   } catch (error) {

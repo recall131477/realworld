@@ -29,7 +29,7 @@ const fetchArticle = async () => {
 
   try {
     const res = await getArticle(route.params.slug as string);
-    article.value = res.article;
+    article.value = res.data.article;
   } catch (error) {
     errors.value = (error as any).errors;
   }
@@ -50,7 +50,7 @@ const handleArticle = async () => {
     router.push({
       name: 'article',
       params: {
-        slug: res.article.slug,
+        slug: res.data.article.slug,
       },
     });
   } catch (error) {

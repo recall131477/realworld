@@ -35,7 +35,7 @@ const fetchProfile = async () => {
 
   try {
     const res = await getProfile(route.params.username as string);
-    profile.value = res.profile;
+    profile.value = res.data.profile;
   } catch (error) {
     errors.value = (error as any).errors;
   }
@@ -56,7 +56,7 @@ const toggleFollow = async () => {
     const res = profile.value.following
       ? await unfollowProfile(profile.value.username)
       : await followProfile(profile.value.username);
-    profile.value.following = res.profile.following;
+    profile.value.following = res.data.profile.following;
   } catch (error) {
     errors.value = (error as any).errors;
   }

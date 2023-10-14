@@ -35,7 +35,7 @@ const handleCreateComment = async () => {
       },
     });
 
-    emit('create-comment', res.comment);
+    emit('create-comment', res.data.comment);
     content.value = '';
   } catch (error) {
     errors.value = (error as any).errors;

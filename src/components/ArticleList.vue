@@ -32,8 +32,9 @@ const fetchArticles = async () => {
 
   try {
     const res = await getArticles(config);
-    articles.value = res.articles;
-    articlesCount.value = res.articlesCount;
+
+    articles.value = res.data.articles;
+    articlesCount.value = res.data.articlesCount;
   } catch (error) {
     errors.value = (error as any).errors;
   }

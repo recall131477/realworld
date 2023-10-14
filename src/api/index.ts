@@ -14,7 +14,12 @@ import type {
 /** article */
 export const getArticles = (
   config: ArticleConfig
-): Promise<{ articles: Article[]; articlesCount: number }> => {
+): Promise<{
+  data: {
+    articles: Article[];
+    articlesCount: number;
+  };
+}> => {
   const url = `/articles${config.type === 'my-feed' ? '/feed' : ''}`;
 
   return request({
@@ -24,7 +29,9 @@ export const getArticles = (
   });
 };
 
-export const getArticle = (slug: string): Promise<{ article: Article }> =>
+export const getArticle = (
+  slug: string
+): Promise<{ data: { article: Article } }> =>
   request({
     method: 'GET',
     url: `/articles/${slug}`,
@@ -32,7 +39,7 @@ export const getArticle = (slug: string): Promise<{ article: Article }> =>
 
 export const createArticle = (params: {
   article: CreateArticle;
-}): Promise<{ article: Article }> =>
+}): Promise<{ data: { article: Article } }> =>
   request({
     method: 'POST',
     url: '/articles',
@@ -44,7 +51,7 @@ export const updateArticle = (
   params: {
     article: UpdateArticle;
   }
-): Promise<{ article: Article }> =>
+): Promise<{ data: { article: Article } }> =>
   request({
     method: 'PUT',
     url: `/articles/${slug}`,
@@ -58,7 +65,9 @@ export const deleteArticle = (slug: string): Promise<void> =>
   });
 
 /** comment */
-export const getComments = (slug: string): Promise<{ comments: Comment[] }> =>
+export const getComments = (
+  slug: string
+): Promise<{ data: { comments: Comment[] } }> =>
   request({
     method: 'GET',
     url: `/articles/${slug}/comments`,
@@ -71,7 +80,7 @@ export const createComment = (
       body: string;
     };
   }
-): Promise<{ comment: Comment }> =>
+): Promise<{ data: { comment: Comment } }> =>
   request({
     method: 'POST',
     url: `/articles/${slug}/comments`,
@@ -85,7 +94,9 @@ export const deleteComment = (slug: string, id: number): Promise<void> =>
   });
 
 /** favorite */
-export const favoriteArticle = (slug: string): Promise<{ article: Article }> =>
+export const favoriteArticle = (
+  slug: string
+): Promise<{ data: { article: Article } }> =>
   request({
     method: 'POST',
     url: `/articles/${slug}/favorite`,
@@ -93,20 +104,24 @@ export const favoriteArticle = (slug: string): Promise<{ article: Article }> =>
 
 export const unfavoriteArticle = (
   slug: string
-): Promise<{ article: Article }> =>
+): Promise<{ data: { article: Article } }> =>
   request({
     method: 'DELETE',
     url: `/articles/${slug}/favorite`,
   });
 
 /** profile */
-export const getProfile = (username: string): Promise<{ profile: Author }> =>
+export const getProfile = (
+  username: string
+): Promise<{ data: { profile: Author } }> =>
   request({
     method: 'GET',
     url: `/profiles/${username}`,
   });
 
-export const followProfile = (username: string): Promise<{ profile: Author }> =>
+export const followProfile = (
+  username: string
+): Promise<{ data: { profile: Author } }> =>
   request({
     method: 'POST',
     url: `/profiles/${username}/follow`,
@@ -114,28 +129,32 @@ export const followProfile = (username: string): Promise<{ profile: Author }> =>
 
 export const unfollowProfile = (
   username: string
-): Promise<{ profile: Author }> =>
+): Promise<{ data: { profile: Author } }> =>
   request({
     method: 'DELETE',
     url: `/profiles/${username}/follow`,
   });
 
 /** user */
-export const login = (params: { user: User }): Promise<{ user: UserInfo }> =>
+export const login = (params: {
+  user: User;
+}): Promise<{ data: { user: UserInfo } }> =>
   request({
     method: 'POST',
     url: '/users/login',
     data: params,
   });
 
-export const register = (params: { user: User }): Promise<{ user: UserInfo }> =>
+export const register = (params: {
+  user: User;
+}): Promise<{ data: { user: UserInfo } }> =>
   request({
     method: 'POST',
     url: '/users',
     data: params,
   });
 
-export const getUser = (): Promise<{ user: UserInfo }> =>
+export const getUser = (): Promise<{ data: { user: UserInfo } }> =>
   request({
     method: 'GET',
     url: '/user',
@@ -143,7 +162,7 @@ export const getUser = (): Promise<{ user: UserInfo }> =>
 
 export const updateUser = (params: {
   user: UserInfo;
-}): Promise<{ user: UserInfo }> =>
+}): Promise<{ data: { user: UserInfo } }> =>
   request({
     method: 'PUT',
     url: '/user',
@@ -151,7 +170,7 @@ export const updateUser = (params: {
   });
 
 /** tag */
-export const getTags = (): Promise<{ tags: string[] }> =>
+export const getTags = (): Promise<{ data: { tags: string[] } }> =>
   request({
     method: 'GET',
     url: '/tags',

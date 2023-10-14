@@ -77,7 +77,7 @@ const toggleFavorite = async () => {
       ? await unfavoriteArticle(tempArticle.value.slug)
       : await favoriteArticle(tempArticle.value.slug);
 
-    emit('update-favorite', res.article);
+    emit('update-favorite', res.data.article);
   } catch (error) {
     errors.value = (error as any).errors;
   }
