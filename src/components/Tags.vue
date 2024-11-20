@@ -21,6 +21,9 @@ onMounted(async () => {
 
   isLoading.value = false;
 });
+
+// 假資料
+const fakeTags = ref<string[]>(['TypeScript', 'Vue', 'React', 'Node', 'CSS']);
 </script>
 
 <script lang="ts">
@@ -31,7 +34,7 @@ export default {
 
 <template>
   <div v-if="isLoading" class="py-6">Loading tags...</div>
-  <template v-else>
+  <!-- <template v-else>
     <div class="mt-1 flex flex-wrap gap-1">
       <router-link
         :to="{
@@ -42,6 +45,22 @@ export default {
         }"
         class="rounded-full bg-[#818a91] px-2 py-0.5 text-sm text-white duration-300 hover:bg-[#687077]"
         v-for="tag in tags"
+        :key="tag"
+        >{{ tag }}</router-link
+      >
+    </div>
+  </template> -->
+  <template v-else>
+    <div class="mt-1 flex flex-wrap gap-1">
+      <router-link
+        :to="{
+          name: 'tag',
+          params: {
+            tag: tag,
+          },
+        }"
+        class="rounded-full bg-[#818a91] px-2 py-0.5 text-sm text-white duration-300 hover:bg-[#687077]"
+        v-for="tag in fakeTags"
         :key="tag"
         >{{ tag }}</router-link
       >

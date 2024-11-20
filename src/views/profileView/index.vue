@@ -5,6 +5,8 @@ import { storeToRefs } from 'pinia';
 import { useUserStore } from '@/stores/user';
 import { getProfile, followProfile, unfollowProfile } from '@/api';
 import ArticleList from '@/components/ArticleList.vue';
+// 假頭像圖片
+import fakeAuthorImage from '@/assets/images/turtle.jpg';
 import type { Author } from '@/types';
 import type { ErrorObject } from '@/types/error';
 
@@ -26,9 +28,9 @@ const isFollowing = ref(false);
 
 const errors = ref<ErrorObject>({});
 
-const isCurrentUser = computed(
-  () => isLoggedIn && userInfo.value?.username === profile.value.username
-);
+// const isCurrentUser = computed(
+//   () => isLoggedIn && userInfo.value?.username === profile.value.username
+// );
 
 const fetchProfile = async () => {
   isLoading.value = true;
@@ -75,6 +77,17 @@ watch(
   },
   { immediate: true }
 );
+
+// 假資料
+const fakeProfile = ref<Author>({
+  username: '肉鬆',
+  bio: '大家好，我是肉鬆，是一名前端工程師。',
+  image: fakeAuthorImage,
+  following: false,
+});
+const isFakeCurrentUser = computed(
+  () => isLoggedIn && userInfo.value?.username === fakeProfile.value.username
+);
 </script>
 
 <script lang="ts">
@@ -88,7 +101,7 @@ export default {
     <div class="mx-auto max-w-[1140px] px-[15px]">
       <div class="md:mx-auto md:w-10/12">
         <div v-if="isLoading">Loading profile...</div>
-        <template v-else>
+        <!-- <template v-else>
           <img
             :src="profile.image"
             :alt="profile.username"
@@ -117,6 +130,38 @@ export default {
               <i class="ion-plus-round"></i>
               &nbsp; {{ profile.following ? 'Unfollow' : 'Follow' }}
               {{ profile.username }}
+            </button>
+          </div>
+        </template> -->
+        <template v-else>
+          <img
+            :src="fakeProfile.image"
+            :alt="fakeProfile.username"
+            class="mx-auto h-[100px] w-[100px] rounded-full object-cover"
+          />
+          <div class="mt-4 text-center">
+            <h1 class="text-2xl font-bold">{{ fakeProfile.username }}</h1>
+            <p class="mt-1 font-light text-[#aaa]">{{ fakeProfile.bio }}</p>
+          </div>
+          <div class="mt-2 text-right">
+            <router-link
+              :to="{ name: 'settings' }"
+              class="inline-block rounded border border-[#999] px-2 py-1 text-sm leading-tight text-[#999] duration-300 hover:bg-[#ccc]"
+              v-if="isFakeCurrentUser"
+            >
+              <i class="ion-gear-a"></i> Edit Profile Settings
+            </router-link>
+            <button
+              type="button"
+              class="inline-block rounded border border-[#999] px-2 py-1 text-sm leading-tight text-[#999] hover:bg-[#ccc] disabled:pointer-events-none disabled:opacity-60"
+              :class="{ 'bg-white text-[#373a3c]': fakeProfile.following }"
+              :disabled="isFollowing"
+              @click="toggleFollow"
+              v-else
+            >
+              <i class="ion-plus-round"></i>
+              &nbsp; {{ fakeProfile.following ? 'Unfollow' : 'Follow' }}
+              {{ fakeProfile.username }}
             </button>
           </div>
         </template>
