@@ -12,7 +12,7 @@ const router = useRouter();
 
 const userStore = useUserStore();
 const { userInfo } = storeToRefs(userStore);
-const { setUser } = userStore;
+const { setUser, removeUser } = userStore;
 
 const user = ref<UserInfo>({
   email: '',
@@ -49,6 +49,11 @@ const handleUpdateUser = async () => {
 const debounceHandleUpdateUser = debounce(() => {
   handleUpdateUser();
 }, 250);
+
+const logout = () => {
+  removeUser();
+  router.push({ name: 'global-feed' });
+};
 
 onMounted(() => {
   if (userInfo.value) {
@@ -140,6 +145,7 @@ export default {
         <div class="mt-4 border-t border-black/10 pt-4">
           <button
             class="inline-block rounded border border-danger px-4 py-2 leading-tight text-danger duration-300 hover:bg-danger hover:text-white"
+            @click="logout"
           >
             Or click here to logout.
           </button>
