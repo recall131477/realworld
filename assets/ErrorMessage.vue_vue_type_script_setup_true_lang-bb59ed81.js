@@ -1,0 +1,1 @@
+import{e as a,o as e,c as r,F as c,i as l,m,t as n}from"./index-abc583f2.js";const p={key:0,class:"mb-4 list-disc pl-10 font-bold text-danger"},_={name:"ErrorMessageComponent"},f=a({..._,props:{errors:{}},setup(i){return(s,u)=>s.errors?(e(),r("ul",p,[(e(!0),r(c,null,l(s.errors,(t,o)=>(e(),r("li",{key:o},n(o)+" "+n(t?t[0]:""),1))),128))])):m("",!0)}});export{f as _};
